@@ -7,4 +7,4 @@ class Schedule(BaseModel):
     schedule_id: str
     professor_id: str
     day_of_week: DayOfWeek
-    start_time: str
+    time_slot: str
