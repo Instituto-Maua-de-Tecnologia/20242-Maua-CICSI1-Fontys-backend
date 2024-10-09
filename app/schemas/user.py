@@ -1,13 +1,12 @@
 from pydantic import BaseModel
-
-class UserCreate(BaseModel):
-    name: str
-    email: str
+from app.enum.status_type import StatusType
+from app.enum.user_type import UserType
 
 class User(BaseModel):
-    id: int
+    user_id: str
     name: str
     email: str
-
-    class Config:
-        orm_mode = True
+    password: str
+    status: StatusType
+    user_type: UserType
+    notes: str
