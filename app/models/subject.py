@@ -8,7 +8,6 @@ class Subject(Base):
 
     subject_code = Column(String, primary_key=True, index=True)  # Código único da matéria
     name = Column(String(255), nullable=False)
-    subject_type = Column(Enum("Laboratory", "Theory"), nullable=False)
-
+    
     # Relacionamento com usuários
     users = relationship("UserSubject", back_populates="subject")
