@@ -11,9 +11,7 @@ class Schedule(Base):
     professor_id = Column(String, ForeignKey('professors.id'), nullable=False)
     subject_id = Column(String, ForeignKey('subjects.id'), nullable=False)
     day_of_week = Column(Enum(DayOfWeek), nullable=False)
-    start_time = Column(Time, nullable=False)
-    end_time = Column(Time, nullable=False)
-
+    time_slot = Column(String, nullable=False)
     # Relacionamentos
     professor = relationship("Professor", back_populates="schedules")
     subject = relationship("Subject", back_populates="schedules")
