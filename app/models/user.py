@@ -15,3 +15,4 @@ class User(Base):
     notes = Column(String(500), nullable=True)
 
     subjects = relationship("UserSubject", back_populates="user")
+    availabilities = relationship("Availability", back_populates="user")
