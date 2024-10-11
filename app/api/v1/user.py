@@ -1,24 +1,19 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from fastapi import APIRouter
 from app.db.session import SessionLocal
-from app.schemas.user import UserCreate, User
-from app.services.user_service import UserService
+
 
 router = APIRouter()
 
+import os
+
 def get_db():
+    print("SQLALCHEMY", os.environ.get("DATABASE_URL"))
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
         
-def login_route():
-    return UserService.login()
-
-@router.get("/auth/callback")
-async def auth_callback_route(code: str, db: Session = Depends(get_db)):
-    return await UserService.auth_callback(code, db)
 
 
 
