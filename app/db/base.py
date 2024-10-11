@@ -1,5 +1,7 @@
-from sqlalchemy.ext.declarative import as_declarative
+from app.db.session import engine
+from sqlalchemy.ext.declarative import declarative_base
 
-@as_declarative()
-class Base:
-    pass
+Base = declarative_base()
+
+def create_tables():
+    Base.metadata.create_all(bind=engine)
