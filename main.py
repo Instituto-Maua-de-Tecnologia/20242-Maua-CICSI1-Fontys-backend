@@ -12,10 +12,13 @@ app = FastAPI()
 
 app.include_router(user.router, prefix="/api/v1/users", tags=["users"])
 
+
+
+
 @app.get("/")
 async def read_root():
     logger.info("Acessando a raiz")
-    return {"Hello": "World"}
+    return {"API OK!"}
 
 if __name__ == "__main__":
     import uvicorn
