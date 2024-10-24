@@ -2,6 +2,6 @@ from enum import Enum
 
 
 class StatusType(Enum):
-    ACTIVE = 'Active'
-    INACTIVE = 'Inactive'
-    
+    SENT = 'Sent'
+    UNSENT = 'Unsent'
+    VERIFIED = 'Verified'
