@@ -10,3 +10,12 @@ class User(BaseModel):
     status: StatusType
     user_type: UserType
     notes: str
+    
+
+class CreateUserRequest(BaseModel):
+    email: str
+    name: str
+    password: str
+
+class CreateUserResponse(BaseModel):
+    message: str
