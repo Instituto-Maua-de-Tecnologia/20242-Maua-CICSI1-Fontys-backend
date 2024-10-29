@@ -1,7 +1,7 @@
 
 import logging
 from fastapi import FastAPI
-from app.api.v1 import user
+from app.api.v1.routes import user
 
 # Configurando o logger
 logging.basicConfig(level=logging.INFO)
@@ -10,9 +10,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-app.include_router(user.router, prefix="/api/v1/users", tags=["users"])
-
-
+app.include_router(user.router, prefix="/api", tags=["users"])
 
 
 @app.get("/")
