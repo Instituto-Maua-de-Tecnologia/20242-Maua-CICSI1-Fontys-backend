@@ -1,8 +1,8 @@
-"""create tables
+"""Initial migration
 
-Revision ID: c3ec88a7853e
+Revision ID: 3b85c8a0dddf
 Revises: 
-Create Date: 2024-10-10 23:28:42.231192
+Create Date: 2024-10-29 16:12:40.169406
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'c3ec88a7853e'
+revision: str = '3b85c8a0dddf'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -24,8 +24,12 @@ def upgrade() -> None:
         'users',
         sa.Column('user_id', sa.String(), nullable=False),
         sa.Column('microsoft_id', sa.String(), nullable=False),
+        sa.Column('email', sa.String(), nullable=False),
+        sa.Column('password', sa.String(), nullable=False),
         sa.Column('status', sa.String(), nullable=False),
-        sa.Column('notes', sa.String(), nullable=False),
+        sa.Column('name', sa.String(), nullable=False),
+        sa.Column('user_type', sa.String(), nullable=False),
+        sa.Column('notes', sa.String(500), nullable=True),
         sa.PrimaryKeyConstraint('user_id')
     )
         
@@ -69,6 +73,7 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint('availability_id')
     )
     
+    # ### end Alembic commands ###
 
 
 def downgrade() -> None:

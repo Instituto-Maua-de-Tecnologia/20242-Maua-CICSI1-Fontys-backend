@@ -1,26 +1,31 @@
 from logging.config import fileConfig
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+import os
+
+from sqlalchemy import engine_from_config, pool
 from alembic import context
 
-# Importando a Base e os modelos
-from app.db.session import Base  # Ajuste conforme necessário
-from app.models import *         # Importar todos os modelos
+# Importe o Base que contém os metadados dos seus modelos
+from app.db.base import Base  # Substitua pelo caminho correto para seus modelos
 
-# this is the Alembic Config object, which provides
-# access to the values within the .ini file in use.
+# Configuração do Alembic, leitura do .ini e URL do banco de dados
 config = context.config
+database_url = os.getenv("DATABASE_URL", "postgresql://fontys:fontys@localhost/fontys")
+config.set_main_option("sqlalchemy.url", database_url)
 
-# Interpret the config file for Python logging.
-# This line sets up loggers basically.
+# Configuração de logging
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Adiciona o objeto MetaData dos modelos para suporte ao 'autogenerate'
-target_metadata = Base.metadata  # Agora está definido
+# Defina target_metadata para incluir os metadados dos seus modelos
+target_metadata = Base.metadata
 
 def run_migrations_offline() -> None:
-    """Run migrations in 'offline' mode."""
+    """Executa migrações no modo offline.
+
+    Este modo configura o contexto com apenas uma URL,
+    sem um objeto Engine. Não requer um DBAPI.
+
+    """
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -32,8 +37,13 @@ def run_migrations_offline() -> None:
     with context.begin_transaction():
         context.run_migrations()
 
+
 def run_migrations_online() -> None:
-    """Run migrations in 'online' mode."""
+    """Executa migrações no modo online.
+
+    Neste modo, criamos um Engine e associamos uma conexão com o contexto.
+
+    """
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
@@ -47,6 +57,7 @@ def run_migrations_online() -> None:
 
         with context.begin_transaction():
             context.run_migrations()
+
 
 if context.is_offline_mode():
     run_migrations_offline()
