@@ -43,7 +43,7 @@ Example: `feature/generate-schedule`
 - **bug/** - For bugfixes
 
 Example: `bug/fix-login-error`
-- **chore/**
+- **chore/** - For refactoring, optimizing, or making small tweaks to existing code/features.
 
 Example: `chore/update-readme`
 
