@@ -1,16 +1,16 @@
 # Instituto-Maua-de-Tecnologia-20242-Maua-CICSI1-Fontys-backend-B
 This repository hosts the backend code for the collaborative scheduling application developed by Instituto Mauá de Tecnologia and Fontys. This application allows the coordinator at Mauá to generate class schedules based on the availability of teachers.
 
-## Installing and running the project.
+## Installing
 1. **Create a virtual env**
 
 `python -m venv venv`
 
 2. **Use the virtual env**
 
-`source venv/bin/activate` To activate.
+To active run: `source venv/bin/activate`
 
-`deactivate` to deactive.
+To deactive run: `deactivate`
 
 3. **Install the required packages**
 
@@ -22,9 +22,10 @@ Copy the `.env.EXAMPLE.env` to `.env`
 
 Open the file and update the values
 
-5. **Run the project**
+## Running the project
+Make sure you are inside of the virtual env as described in step 2 in the "Installing" chapter
 
-`python main.py` while inside of the virtual env
+`python main.py`
 
 ## Branching
 We use specific branches for different stages and types of work. Here’s an overview:
