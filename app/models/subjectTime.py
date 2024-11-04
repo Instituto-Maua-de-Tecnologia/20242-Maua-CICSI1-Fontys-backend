@@ -3,5 +3,6 @@ class subjectTime:
     def __init__(self, timeSlot):
         self.time = timeSlot
 
-    def SetSubject(self, subject):
+    def SetSubjectInfo(self, subject, professor):
         self.subject = subject
+        self.professor = professor

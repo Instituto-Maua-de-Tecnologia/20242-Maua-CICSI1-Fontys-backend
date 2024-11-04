@@ -7,3 +7,4 @@ class day:
         self.timeslots = [subjectTime(TimeSlot.FIRST_CLASS), subjectTime(TimeSlot.SECOND_CLASS),
                           subjectTime(TimeSlot.THIRD_CLASS)]
         self.weekDay = dayName
+        self.numberOfSubjects = 0
