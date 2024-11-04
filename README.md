@@ -1,28 +1,45 @@
 # Instituto-Maua-de-Tecnologia-20242-Maua-CICSI1-Fontys-backend-B
-This is the repository for the backend of the collaberative project between Fontys and Maua. The project is an application that allows the coordinator of Maua to generate schedules for the different classes based on the teacher availability.
+This repository hosts the backend code for the collaborative scheduling application developed by Instituto Mauá de Tecnologia and Fontys. This application allows the coordinator at Mauá to generate class schedules based on the availability of teachers.
 
 ## Install instructions
-Create a virtual env (optional)
+1. **Create a virtual env** (optional)
+
 `python -m venv venv`
-Install the required packages
+
+2. **Install the required packages**
+
 `pip install -r requirements.txt`
-Copy the `.env.EXAMPLE.env` to `.env` and update the values
+
+3. **Configure Environment variables**
+
+Copy the `.env.EXAMPLE.env` to `.env` 
+
+Open the file and update the values
 
 ## Branching
-Our main branches are
-`dev` for staging changes
-`prod` for the production version of the application
+We use specific branches for different stages and types of work. Here’s an overview:
 
-Besides that we split up work branches as follows:
-- feature/
-Used for new features.
-- bug/
-For bugfixes.
-- chore/
-Refactoring, making tweaks to existing code / features.
+### Main branches
+- **Dev:** The development branch used as a staging area
+- **Prod:**  The production branch holding the latest stable version
 
-For the name use lowercase kebab-case e.g. `feature/generate-schedule-chatgpt`.
+### Work branches
+For ongoing work, create branches based on the task type:
+
+- **feature/** - For new features
+
+Example: `feature/generate-schedule`
+- **bug/** - For bugfixes
+
+Example: `bug/fix-login-error`
+- **chore/**
+
+Example: `chore/update-readme`
+
+Use **lowercase kebab-case** for naming branches, with the task type followed by a descriptive name.
 
 ## Pull requests
-When you are done with any of the work branches, create a pull request to dev where someone who did not commit any work in the branch should review it before it can be merged.
+1. When you've completed work in a feature, bug or chore branch create a **pull request** to merge it into `dev`
+2. Assign the **Ready For Review** label to the pull request.
+3. Assign a team member who did not contribute to that branch as a **reviewer**. The reviewer should verify the changes before they can be merged.
 
