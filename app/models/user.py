@@ -13,7 +13,7 @@ class User(Base):
     microsoft_id = Column(String(), nullable=False)
     email = Column(String(), unique=True, nullable=False)
     password = Column(String(), nullable=False)
-    status = Column(Enum(StatusType), default="Active", nullable=False)
+    status = Column(Enum(StatusType), default=StatusType.VERIFIED, nullable=False)
     name = Column(String(), nullable=False)
     user_type = Column(Enum(UserType), nullable=False)
     notes = Column(String(500), nullable=True)
