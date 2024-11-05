@@ -11,9 +11,7 @@ Base = declarative_base()
 
 def get_db():
     db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+    return db
         
-        
+
+# python app\repositories\load_user_mock_to_postgres.py 
