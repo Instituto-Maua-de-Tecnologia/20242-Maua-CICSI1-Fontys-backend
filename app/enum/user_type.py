@@ -2,7 +2,7 @@ from enum import Enum
 
 class UserType(Enum):
     SECRETARY = "Secretary"
-    PROFESSOR = "Professor"
+    PROFESSOR = "Profesor"
     COORDINATOR = "Coordinator"
     NOT_REGISTERED = "NotRegistered"
 
