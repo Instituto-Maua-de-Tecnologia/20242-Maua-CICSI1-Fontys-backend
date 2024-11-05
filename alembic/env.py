@@ -1,11 +1,15 @@
 from logging.config import fileConfig
 import os
+from dotenv import load_dotenv
 
 from sqlalchemy import engine_from_config, pool
 from alembic import context
 
 # Importe o Base que contém os metadados dos seus modelos
 from app.db.base import Base  # Substitua pelo caminho correto para seus modelos
+
+# make sure .env file is loaded containing database urls.
+load_dotenv()
 
 # Configuração do Alembic, leitura do .ini e URL do banco de dados
 config = context.config
