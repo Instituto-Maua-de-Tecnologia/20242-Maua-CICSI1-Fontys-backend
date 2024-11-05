@@ -1,8 +1,11 @@
-class subjectTime:
+class SubjectTime:
 
-    def __init__(self, timeSlot):
-        self.time = timeSlot
+    def __init__(self, time_slot, day):
+        self.subject = None
+        self.professor = None
+        self.time = time_slot
+        self.day = day
 
-    def SetSubjectInfo(self, subject, professor):
+    def set_subject_info(self, subject, professor):
         self.subject = subject
         self.professor = professor

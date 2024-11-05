@@ -1,10 +1,12 @@
-from app.models.subjectTime import subjectTime
+from app.models.subjectTime import SubjectTime
 from app.enum.time_slot import TimeSlot
+from app.enum.days_of_week import DayOfWeek
 
 class day:
 
-    def __init__(self, dayName):
-        self.timeslots = [subjectTime(TimeSlot.FIRST_CLASS), subjectTime(TimeSlot.SECOND_CLASS),
-                          subjectTime(TimeSlot.THIRD_CLASS)]
-        self.weekDay = dayName
+    def __init__(self, day_name):
+        self.timeslots = [SubjectTime(TimeSlot.FIRST_CLASS, DayOfWeek(day_name)),
+                          SubjectTime(TimeSlot.SECOND_CLASS,DayOfWeek(day_name)),
+                          SubjectTime(TimeSlot.THIRD_CLASS, DayOfWeek(day_name))]
+        self.weekday = DayOfWeek(day_name)
         self.numberOfSubjects = 0
