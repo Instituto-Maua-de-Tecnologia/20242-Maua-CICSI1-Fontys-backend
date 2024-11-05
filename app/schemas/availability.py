@@ -1,9 +1,5 @@
-
-
 from pydantic import BaseModel
-
 from app.enum.time_slot import TimeSlot
-
 
 class Availability(BaseModel):
     availability_id: str
