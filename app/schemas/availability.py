@@ -1,5 +1,3 @@
-
-
 from pydantic import BaseModel
 
 from app.enum.time_slot import TimeSlot
