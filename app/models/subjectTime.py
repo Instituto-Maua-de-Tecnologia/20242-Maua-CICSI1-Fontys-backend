@@ -1,3 +1,5 @@
+from app.enum.days_of_week import DayOfWeek
+
 class SubjectTime:
 
     def __init__(self, time_slot, day):

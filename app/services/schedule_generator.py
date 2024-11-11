@@ -1,24 +1,33 @@
+from app.models.subjectTime import SubjectTime
 from app.models.week import Week
+from app.models.subject_count import SubjectCount
 
 class ScheduleGenerator:
 
     def order_schedule(self, list_available_teacher_subject_times, list_of_subjects, semester):
-        Week(semester)
+        """
+        Takes a list of subjects that need to be taught in a week,
+         a list of subject times when professors can teach in that week, and the semester.
+         Then it returns a week with the subjects ordered i day's based on the times professors can teach.
+        """
+        week = Week(semester)
 
         subjects_sorted = self.sort_list_of_subjects_by_subject_frequency(
             list_available_teacher_subject_times, list_of_subjects)
 
         for subject in subjects_sorted:
-            self.order_days_based_on_amount_of_subjects_per_day(Week)
-            for day in Week.days:
-                available_subject_times = filter(lambda st: st.subjectTime.subject == subject, subjects_sorted)
+            self.order_days_based_on_amount_of_subjects_per_day(week)
+            for day in week.days:
+                available_subject_times = list(filter(lambda st: st.subject == subject,
+                                                      list_available_teacher_subject_times))
                 if self.put_subject_in_day(available_subject_times,day):
                     break
-                elif Week.days.index(day) == -1:
+                elif week.days.index(day) == -1:
                     return f"subject: {subject} to the schedule pleas make sure there are enough available times"
+                # handel errors better when there is not enough places to put the subjects
 
 
-        return Week
+        return week
 
     # noinspection PyMethodMayBeStatic
     def order_days_based_on_amount_of_subjects_per_day(self, week):
@@ -28,19 +37,34 @@ class ScheduleGenerator:
         """
         week.days.sort(key=lambda x: x.numberOfSubjects)
 
+        return week
+
     # noinspection PyMethodMayBeStatic
     def sort_list_of_subjects_by_subject_frequency(self, list_available_teacher_subject_times, list_of_subjects):
         """
-        Takes a list of timeslots and subjects and returns a list of subjects that are in the timeslots and in the given
-        list of subjects, sorted based on frequency giving the least frequent subject first and most frequent last.
+        Takes a list of timeslots and subjects and returns the list of subjects based on how frequently they appear in the list of timeslots
+        giving the least frequent subject first and most frequent last.
         """
-        available_teacher_subjects = []
-        for subject in set(list_available_teacher_subject_times):
-            if subject in list_of_subjects:
-                available_teacher_subjects.append((list_available_teacher_subject_times.count(subject), subject))
+        subject_counts = []
+        for subject in dict.fromkeys(list_of_subjects):
+            if sum(s.subject == subject for s in list_available_teacher_subject_times) != 0:
+                subject_counts.append(
+                    SubjectCount(sum(s.subject == subject for s in list_available_teacher_subject_times),subject))
+            else:
+                return "error" # handel error when the list of timeslots does net contain a timeslot for a subject
 
-        available_teacher_subjects.sort(key=lambda tup: (-tup[0], tup[1]))
-        return available_teacher_subjects
+        for count in subject_counts:
+            count.count /= list_of_subjects.count(count.subject_name)
+
+        subject_counts.sort(key=lambda x: x.count)
+
+        sorted_list = []
+
+        for count_subject in subject_counts:
+            for subject in filter(lambda s: s == count_subject.subject_name, list_of_subjects):
+                sorted_list.append(subject)
+
+        return sorted_list
 
     # noinspection PyMethodMayBeStatic
     def put_subject_in_day(self, subject_times, target_day):
@@ -50,7 +74,7 @@ class ScheduleGenerator:
         """
         try:
             # Filter the SubjectTime instances that match the target day’s weekday
-            relevant_subject_times = filter(lambda st: st.day.weekday == target_day.weekday, subject_times)
+            relevant_subject_times = list(filter(lambda st: st.day == target_day.weekday, subject_times))
 
             # Find an available timeslot in the target day
             for subject_time in relevant_subject_times:
