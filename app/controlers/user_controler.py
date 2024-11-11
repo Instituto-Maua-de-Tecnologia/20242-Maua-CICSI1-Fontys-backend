@@ -6,7 +6,7 @@ from fastapi import HTTPException
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
-def create_user_controller(request: CreateUserRequest, db: Session) -> CreateUserResponse:
+def create_user_controller(request: CreateUserRequest) -> CreateUserResponse:
     # Validações de campo
     if not request.email:
         raise HTTPException(status_code=400, detail="Email is required")
@@ -19,7 +19,7 @@ def create_user_controller(request: CreateUserRequest, db: Session) -> CreateUse
     
     try:
         # Instancia UserService e chama sign_up
-        user_service = UserService(UserRepository(), db)
+        user_service = UserService(UserRepository())
         user = user_service.sign_up(User(email=request.email, name=request.name, password=request.password))
         return JSONResponse(status_code=201, content={
             "message": "Criado com sucesso",
