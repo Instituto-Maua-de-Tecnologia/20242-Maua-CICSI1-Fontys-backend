@@ -1,8 +1,8 @@
-from app.models.day import day
+from app.models.day import Day
 from app.enum.days_of_week import DayOfWeek
 
 class Week:
-    days = [day(DayOfWeek.MONDAY), day(DayOfWeek.TUESDAY), day(DayOfWeek.WEDNESDAY),
-            day(DayOfWeek.THURSDAY), day(DayOfWeek.FRIDAY)]
+    days = [Day(DayOfWeek.MONDAY), Day(DayOfWeek.TUESDAY), Day(DayOfWeek.WEDNESDAY),
+            Day(DayOfWeek.THURSDAY), Day(DayOfWeek.FRIDAY)]
     def __init__(self, semester):
         self.semester = semester

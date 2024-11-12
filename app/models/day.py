@@ -1,8 +1,8 @@
-from app.models.subjectTime import SubjectTime
+from app.models.subject_time import SubjectTime
 from app.enum.time_slot import TimeSlot
 from app.enum.days_of_week import DayOfWeek
 
-class day:
+class Day:
 
     def __init__(self, day_name):
         self.timeslots = [SubjectTime(TimeSlot.FIRST_CLASS, DayOfWeek(day_name)),
