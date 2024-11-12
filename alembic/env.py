@@ -13,7 +13,7 @@ load_dotenv()
 
 # Configuração do Alembic, leitura do .ini e URL do banco de dados
 config = context.config
-database_url = os.getenv("DATABASE_URL", "postgresql://fontys:fontys@localhost/fontys")
+database_url = os.getenv("DATABASE_URL_AIVEN")
 config.set_main_option("sqlalchemy.url", database_url)
 
 # Configuração de logging
