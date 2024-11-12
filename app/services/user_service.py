@@ -1,4 +1,4 @@
-from app.repositories.user_repository import UserRepository
+from app.repositories.database.user_repository import UserRepository
 from app.schemas.user import User
 from sqlalchemy.orm import Session
 import bcrypt

@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from app.db.base import create_tables
 from app.db.session import get_db
 from app.models.user import User
 from app.schemas.user import User
@@ -11,7 +12,7 @@ class UserRepository:
                 user_id=user.user_id,
                 email=user.email,
                 name=user.name,
-                password=user.password,  # Aqui você deve garantir que o password seja criptografado
+                password=user.password, 
             )
             db.add(new_user)
             db.commit()
@@ -22,3 +23,11 @@ class UserRepository:
         finally:
             db.close()
             
+
+if __name__ == "__main__":
+    # Teste a conexão e criação de tabelas
+    try:
+        create_tables()
+        print("Conexão bem-sucedida e tabelas criadas.")
+    except Exception as e:
+        print(f"Erro ao conectar-se ao banco de dados: {e}")
