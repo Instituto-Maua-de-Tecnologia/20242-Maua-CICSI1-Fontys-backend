@@ -1,4 +1,4 @@
-from app.schemas.week import Week
+from app.models.week import Week
 from app.models.subject_count import SubjectCount
 
 class ScheduleGenerator:
