@@ -1,6 +1,7 @@
 import logging
 import os
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from app.api.v1.routes import user
 import psycopg2
 import uvicorn
@@ -21,6 +22,10 @@ app = FastAPI()
 
 # Incluindo o router do usuário
 app.include_router(user.router, prefix="/api", tags=["users"])
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse(os.path.join("/favicon.ico", "favicon.ico"))
 
 @app.get("/")
 async def read_root():
