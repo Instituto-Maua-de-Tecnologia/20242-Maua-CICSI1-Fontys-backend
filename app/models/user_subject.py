@@ -3,11 +3,10 @@ from app.db.base import Base
 from sqlalchemy.orm import relationship
 
 class UserSubject(Base):
-    __tablename__ = "user_subjects"
+    __tablename__ = "user_subject"
 
-    subject_id = Column(String, primary_key=True, index=True)
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
-    subject_code = Column(String, ForeignKey("subjects.code"), nullable=False)
+    subject_code = Column(String, ForeignKey("subject_codes.id"), nullable=False)
 
-    user = relationship("User", back_populates="subjects")
-    subject = relationship("Subject", back_populates="users")
+    users = relationship("User", back_populates="subjects")
+    subject_codes = relationship("Subject", back_populates="users")
