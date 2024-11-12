@@ -3,9 +3,7 @@ from app.models.user_subject import UserSubject
 
 
 class Subject(BaseModel):
-    subject_id: str
-    name: str
     subject_code: str
+    name: str
     study_load: int
-    user: UserSubject 
     
