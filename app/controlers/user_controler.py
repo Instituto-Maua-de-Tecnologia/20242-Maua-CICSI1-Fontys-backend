@@ -1,6 +1,6 @@
 from app.models.user import User
 from app.schemas.user import CreateUserRequest, CreateUserResponse
-from app.repositories.user_repository import UserRepository
+from app.repositories.database.user_repository import UserRepository
 from app.services.user_service import UserService
 from fastapi import HTTPException
 from fastapi.responses import JSONResponse
