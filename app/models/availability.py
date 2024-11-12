@@ -1,15 +1,15 @@
-from sqlalchemy import Boolean, Column, Integer, Enum, ForeignKey
+from sqlalchemy import  Column, Enum, ForeignKey, String
 from sqlalchemy.orm import relationship
 from app.db.base import Base
-from app.enum import DaysOfWeek, TimeSlots
+from app.enum import Values
 
 class Availability(Base):
     __tablename__ = "availability"
+    
+    availability_id = Column(String, primary_key=True, index=True)
+    slot_id = Column(String, ForeignKey("slots.slot_id"), nullable=False)
+    user_id = Column(String, ForeignKey("users.user_id"), nullable=False)
+    value = Column(Enum(Values), nullable=False)
 
-    availability_id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("user.user_id"), nullable=False)
-    day_of_week = Column(Enum(DaysOfWeek), nullable=False)
-    time_slot = Column(Enum(TimeSlots), nullable=False)
-    status = Column(Boolean, nullable=False)
-
-    user = relationship("User", back_populates="availabilities")
+    users = relationship("User", back_populates="availabilities")
+    slots = relationship("Slot", back_populates="availabilities")
