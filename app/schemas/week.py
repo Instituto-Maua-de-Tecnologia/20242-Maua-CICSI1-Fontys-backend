@@ -1,4 +1,4 @@
-from app.models.day import Day
+from app.schemas.day import Day
 from app.enum.days_of_week import DayOfWeek
 
 class Week:

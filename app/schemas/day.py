@@ -1,4 +1,4 @@
-from app.models.subject_time import SubjectTime
+from app.schemas.subject_time import SubjectTime
 from app.enum.time_slot import TimeSlot
 from app.enum.days_of_week import DayOfWeek
 
