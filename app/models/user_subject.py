@@ -1,9 +1,9 @@
-from sqlalchemy import Column, Integer, ForeignKey, String
-from app.db.base import Base
+from sqlalchemy import Column, ForeignKey, String
 from sqlalchemy.orm import relationship
+from app.core.database import Base
 
 class UserSubject(Base):
-    __tablename__ = "user_subject"
+    __tablename__ = "user_subjects"
 
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
     subject_code = Column(String, ForeignKey("subject_codes.id"), nullable=False)
