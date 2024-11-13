@@ -1,18 +1,18 @@
 from pydantic import BaseModel
 from app.enum.user_type import UserType
 
-class User(BaseModel):
+class UserBase(BaseModel):
     user_id: str
     microsoft_id: str
     name: str
-    user_type: UserType
     notes: str
     
 
-class CreateUserRequest(BaseModel):
-    email: str
-    name: str
+class UserCreate(UserBase):
     password: str
 
-class CreateUserResponse(BaseModel):
-    message: str
+class UserInDB(UserBase):
+    id: int
+
+    class Config:
+        orm_mode = True
