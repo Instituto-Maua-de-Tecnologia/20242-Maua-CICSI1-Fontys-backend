@@ -1,5 +1,5 @@
 from sqlalchemy import  Column, ForeignKey, Integer, String
-from app.db.base import Base
+from app.core.database import Base
 from sqlalchemy.orm import relationship
 
 class Coordination(Base): 
