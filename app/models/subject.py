@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, String, Enum
-from app.db.base import Base
-from sqlalchemy.orm import relationship
+from app.core.database import Base
 
 
 class Subject(Base):
