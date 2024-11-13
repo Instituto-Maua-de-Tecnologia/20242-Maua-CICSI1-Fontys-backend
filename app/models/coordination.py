@@ -3,7 +3,7 @@ from app.core.database import Base
 from sqlalchemy.orm import relationship
 
 class Coordination(Base): 
-    __tablename__ = "coordination"
+    __tablename__ = "coordinations"
     
     coordination_id = Column(String, primary_key=True, index=True)
     course_id = Column(String, ForeignKey("courses.course_id"), nullable=False)

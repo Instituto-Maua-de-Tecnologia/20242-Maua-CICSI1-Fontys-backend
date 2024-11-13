@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from app.core.database import Base
 
 class Schedule(Base):
-    __tablename__ = "schedule"
+    __tablename__ = "schedules"
     
     schedule_id = Column(String, primary_key=True, index=True)
     user_id = Column(String, ForeignKey('users.user_id'), nullable=False)

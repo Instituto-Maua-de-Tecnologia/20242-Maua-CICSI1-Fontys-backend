@@ -5,7 +5,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 
 
 class SemesterTerm(Base): 
-    __table__ = 'semester_term'
+    __table__ = 'semester_terms'
     
     semester_id = Column(String, primary_key=True, index=True)
     course_id = Column(String, ForeignKey("courses.course_id"), nullable=False)
