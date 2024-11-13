@@ -4,7 +4,7 @@ from app.core.database import Base
 from app.enum import Values
 
 class Availability(Base):
-    __tablename__ = "availability"
+    __tablename__ = "availabilitys"
     
     availability_id = Column(String, primary_key=True, index=True)
     slot_id = Column(String, ForeignKey("slots.slot_id"), nullable=False)
