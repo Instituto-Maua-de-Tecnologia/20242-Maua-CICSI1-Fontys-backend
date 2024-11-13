@@ -1,11 +1,10 @@
 
-
-from pydantic import BaseModel
+from app.core.database import Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, ForeignKey, Integer, String
 
 
-class SemesterTerm(BaseModel): 
+class SemesterTerm(Base): 
     __table__ = 'semester_term'
     
     semester_id = Column(String, primary_key=True, index=True)
