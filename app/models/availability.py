@@ -1,6 +1,6 @@
 from sqlalchemy import  Column, Enum, ForeignKey, String
 from sqlalchemy.orm import relationship
-from app.db.base import Base
+from app.core.database import Base
 from app.enum import Values
 
 class Availability(Base):
