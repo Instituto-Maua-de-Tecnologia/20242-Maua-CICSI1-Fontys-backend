@@ -1,15 +1,13 @@
 
-
-
-from pydantic import BaseModel
+from app.core.database import Base
 from sqlalchemy import Column, Date, Enum, ForeignKey, String
 from sqlalchemy.orm import relationship
 from app.enum.status_type import StatusType
 
 
 
-class UserShipping(BaseModel):
-    __tablename__ = 'user_shipping'
+class UserShipping(Base):
+    __tablename__ = 'user_shippings'
 
     shipping_id = Column(String, primary_key=True, index=True)
     user_id = Column(String, ForeignKey('users.id'), nullable=False)
