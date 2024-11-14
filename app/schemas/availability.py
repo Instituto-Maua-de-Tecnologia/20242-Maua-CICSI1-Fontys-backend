@@ -1,11 +1,11 @@
 from pydantic import BaseModel
 
-from app.enum.time_slot import TimeSlot
-from app.enum.values import Values
+from app.enums.time_slot import TimeSlot
+from app.enums.availability_values import Values
 
 
-class Availability(BaseModel):
+class AvailabilityBase(BaseModel):
     availability_id: str
     user_id: str
-    slot_id: str
+    slot_id: int
     value: Values
