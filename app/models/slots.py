@@ -1,13 +1,16 @@
 from app.core.database import Base
-from sqlalchemy import Column, Enum, String, Time
+from sqlalchemy import Column, DateTime, Enum as SqlEnum, Integer
 
-from app.enum.days_of_week import DayOfWeek
+from app.enums.days_of_week import DayOfWeek
+from sqlalchemy.orm import relationship
 
 
-class Slots(Base): 
+class Slot(Base): 
     __tablename__ = "slots"
     
-    slot_id = Column(String, primary_key=True, index=True)
-    day_of_week = Column(Enum(DayOfWeek), nullable=False)
-    time = Column(Time, nullable=False)
+    slot_id = Column(Integer, primary_key=True, index=True)
+    day_of_week = Column(SqlEnum(DayOfWeek), nullable=False)
+    time = Column(DateTime, nullable=False)
     
+    availability = relationship("Availability", back_populates="slot")
+    schedule = relationship("Schedule", back_populates="slot")
