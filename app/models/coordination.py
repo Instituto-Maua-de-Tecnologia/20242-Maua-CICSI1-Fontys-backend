@@ -1,15 +1,16 @@
 from sqlalchemy import  Column, ForeignKey, Integer, String
-from app.db.base import Base
+from app.core.database import Base
 from sqlalchemy.orm import relationship
 
 class Coordination(Base): 
-    __tablename__ = "coordination"
+    __tablename__ = "coordinations"
     
     coordination_id = Column(String, primary_key=True, index=True)
     course_id = Column(String, ForeignKey("courses.course_id"), nullable=False)
-    user_id = Column(String, ForeignKey("user.user_id"), nullable=False)
-    semester = Column(Integer, nullable=False)
-    year = Column(Integer, nullable=False)   
+    user_id = Column(String, ForeignKey("users.user_id"), nullable=False)
+    semester = Column(Integer, ForeignKey("semesters.semester_number"), nullable=False)
+    year = Column(String, nullable=False)   
     
-    courses = relationship("Course", back_populates="coordination")
-    users = relationship("User", back_populates="coordination")
+    course = relationship("Course", back_populates="coordination")
+    user = relationship("User", back_populates="coordination")
+    semester = relationship("Semester", back_populates="coordination")
