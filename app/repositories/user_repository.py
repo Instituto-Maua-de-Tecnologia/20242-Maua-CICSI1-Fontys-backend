@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.user import User  # Modelo do banco de dados
+from app.models.users import User  # Modelo do banco de dados
 from app.domain.interfaces.repositories.user_repository_interface import IUserRepository
 from app.domain.entities.user import UserEntity  # Entidade de domínio
 
