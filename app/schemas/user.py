@@ -8,12 +8,8 @@ class UserBase(BaseModel):
     name: str
     notes: str
     
-
-class UserCreate(UserBase):
-    password: str
-
 class UserInDB(UserBase):
-    id: int
+    id: str
 
     class Config:
         from_atributtes = True
