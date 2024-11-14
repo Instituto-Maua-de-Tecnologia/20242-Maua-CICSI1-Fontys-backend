@@ -3,11 +3,11 @@
 from pydantic import BaseModel
 from sqlalchemy import Time
 
-from app.enum.days_of_week import DayOfWeek
+from app.enums.days_of_week import DayOfWeek
 
 
-class Slot(BaseModel):
-    slot_id: str
+class SlotBase(BaseModel):
+    slot_id: int
     day_of_week: DayOfWeek
     time: Time
     
