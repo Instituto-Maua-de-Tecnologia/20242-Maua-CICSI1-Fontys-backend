@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, Enum
+from sqlalchemy import Column, Integer, String
 from app.core.database import Base
+from sqlalchemy.orm import relationship
 
 
 class Subject(Base):
@@ -9,4 +10,10 @@ class Subject(Base):
     name = Column(String(), nullable=False)
     study_load = Column(Integer, nullable=False)
     
+    user_subject = relationship("UserSubject", back_populates="subject")
+    semester = relationship("Semester", back_populates="subject")
+    
+    
+
+
     
