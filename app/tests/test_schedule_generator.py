@@ -1,6 +1,6 @@
 import pytest
-from app.models.week import Week, DayOfWeek
-from app.models.day import TimeSlot, SubjectTime
+from week import Week, DayOfWeek
+from day import TimeSlot, SubjectTime
 from app.services.schedule_generator import ScheduleGenerator
 
 
