@@ -33,3 +33,6 @@ class UserRepository(IUserRepository):
             photo=db_user.photo,
             notes=db_user.notes
         )
+
+    def get_user_by_email(self, email: str) -> UserEntity:
+        pass
