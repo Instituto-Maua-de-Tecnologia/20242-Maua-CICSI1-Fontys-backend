@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from app.enums.user_type import UserType
+
 
 class UserBase(BaseModel):
     user_id: str
