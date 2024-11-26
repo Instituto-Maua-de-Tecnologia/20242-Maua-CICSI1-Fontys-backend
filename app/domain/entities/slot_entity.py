@@ -1,5 +1,6 @@
 from typing import Optional
-from sqlalchemy import Time
+from xmlrpc.client import DateTime
+
 from pydantic import BaseModel
 
 from app.enums.days_of_week import DayOfWeek
@@ -8,4 +9,7 @@ from app.enums.days_of_week import DayOfWeek
 class SlotEntity(BaseModel):
     slot_id: Optional[int] = True
     day_of_week: DayOfWeek
-    time: Time
+    time: DateTime
+
+    class Config:
+        arbitrary_types_allowed = True

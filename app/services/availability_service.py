@@ -1,13 +1,14 @@
 from sqlalchemy.orm.session import Session
 
 from app.domain.entities.availability_entity import AvailabilityEntity
-from app.models.availabilities import Availability
 from app.repositories.availability_repository import AvailabilityRepository
+from app.repositories.slot_repository import SlotRepository
+from app.repositories.user_repository import UserRepository
+
 
 class AvailabilityService:
-    def __init__(self, availability_repository: AvailabilityRepository, db: Session) -> None:
-        self.availability_repository = availability_repository
-        self.db = db
+    def __init__(self, db: Session) -> None:
+        self.availability_repository = AvailabilityRepository(db, UserRepository(db), SlotRepository(db))
 
     def set_availability(self, availabilities: list[AvailabilityEntity], user_id: str) -> list[AvailabilityEntity]:
         return self.availability_repository.set_availability(availabilities, user_id)

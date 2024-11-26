@@ -7,3 +7,6 @@ class AvailabilityBase(BaseModel):
     user_id: str
     slot_id: int
     value: AvailabilityValues
+
+class GetUserAvailabilityRequest(BaseModel):
+    user_id: str
