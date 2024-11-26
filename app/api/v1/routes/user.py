@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import SessionLocal
-from app.schemas.user import UserBase, UserCreate, UserInDB
+from app.schemas.user import UserBase, UserInDB
 from app.services.user_service import UserService
 from app.domain.entities.user_entity import UserEntity
 
