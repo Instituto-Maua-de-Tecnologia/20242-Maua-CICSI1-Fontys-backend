@@ -1,4 +1,4 @@
-class SubjectCount():
+class SubjectCount:
 
     def __init__(self, count, subject_name):
         self.count = count

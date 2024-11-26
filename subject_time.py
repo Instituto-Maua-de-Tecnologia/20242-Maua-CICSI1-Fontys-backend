@@ -1,4 +1,4 @@
-from app.enum.days_of_week import DayOfWeek
+from app.enums.days_of_week import DayOfWeek
 
 class SubjectTime:
 
@@ -6,7 +6,7 @@ class SubjectTime:
         self.subject = None
         self.professor = None
         self.time = time_slot
-        self.day = day
+        self.day = DayOfWeek(day)
 
     def set_subject_info(self, subject, professor):
         self.subject = subject

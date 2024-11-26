@@ -1,18 +1,28 @@
-from fastapi import APIRouter
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.controlers.user_controler import create_user_controller
-from app.schemas.user import CreateUserRequest, CreateUserResponse
-from app.db.session import get_db
-
+from app.core.database import SessionLocal
+from app.schemas.user import UserBase, UserCreate, UserInDB
+from app.services.user_service import UserService
+from app.domain.entities.user_entity import UserEntity
 
 router = APIRouter()
 
-@router.post("/user", response_model=CreateUserResponse)
-async def create_user_endpoint(request: CreateUserRequest, db: Session = Depends(get_db)):
-    return create_user_controller(request.email, request.name, request.password, db)
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
+@router.post("/users/", response_model=UserInDB)
+def create_user(user: UserBase, db: Session = Depends(get_db)):
+    service = UserService(db)
+    user_entity = UserEntity(name=user.name, photo=user.photo, notes=user.notes)
+    db_user = service.register_user(user_entity)
+    if not db_user:
+        raise HTTPException(status_code=400, detail="User already exists")
+    return db_user
 
-
-
-
+@router.get('/health')
+def health():
+    return {'status': 'ok'}

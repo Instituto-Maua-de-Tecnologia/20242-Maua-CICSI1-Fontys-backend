@@ -1,11 +1,9 @@
 from pydantic import BaseModel
-from app.models.user_subject import UserSubject
+from app.models.user_subjects import UserSubject
 
 
-class Subject(BaseModel):
-    subject_id: str
-    name: str
+class SubjectBase(BaseModel):
     subject_code: str
+    name: str
     study_load: int
-    user: UserSubject 
     

@@ -1,6 +1,6 @@
 from subject_time import SubjectTime
-from app.enum.time_slot import TimeSlot
-from app.enum.days_of_week import DayOfWeek
+from app.enums.time_slot import TimeSlot
+from app.enums.days_of_week import DayOfWeek
 
 class Day:
 

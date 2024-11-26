@@ -1,21 +1,15 @@
 from pydantic import BaseModel
-from app.enum.status_type import StatusType
-from app.enum.user_type import UserType
+from app.enums.user_type import UserType
 
-class User(BaseModel):
+class UserBase(BaseModel):
     user_id: str
+    microsoft_id: str
+    photo: str
     name: str
-    email: str
-    password: str
-    status: StatusType
-    user_type: UserType
     notes: str
     
+class UserInDB(UserBase):
+    id: str
 
-class CreateUserRequest(BaseModel):
-    email: str
-    name: str
-    password: str
-
-class CreateUserResponse(BaseModel):
-    message: str
+    class Config:
+        from_atributtes = True

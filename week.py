@@ -1,5 +1,5 @@
 from day import Day
-from app.enum.days_of_week import DayOfWeek
+from app.enums.days_of_week import DayOfWeek
 
 class Week:
     days = [Day(DayOfWeek.MONDAY), Day(DayOfWeek.TUESDAY), Day(DayOfWeek.WEDNESDAY),
