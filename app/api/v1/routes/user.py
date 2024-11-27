@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
+
 from app.controllers.get_all_users.get_all_users_controller import GetAllUsersController
 from app.core.database import get_db
 from app.schemas.user import CreateUserSchema, UserResponseSchema
