@@ -9,7 +9,7 @@ class User(Base):
     __tablename__ = "users"
 
     user_id = Column(String(), primary_key=True, index=True, default=lambda: str(uuid4()))
-    microsoft_id = Column(String(), nullable=False)
+    microsoft_id = Column(String(), nullable=True)
     photo = Column(String(), nullable=True)
     name = Column(String(), nullable=False)
     notes = Column(String(500), nullable=True)
