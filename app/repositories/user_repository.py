@@ -1,3 +1,5 @@
+from typing import Optional
+
 from sqlalchemy.orm import Session
 from app.models.users import User  # Modelo do banco de dados
 from app.domain.interfaces.repositories.user_repository_interface import IUserRepository
@@ -28,3 +30,16 @@ class UserRepository(IUserRepository):
                 photo=db_user.photo,
                 notes=db_user.notes
             )
+
+    def get_by_id(self, user_id: str) -> Optional[UserEntity]:
+        try:
+            db_user = self.db.query(User).filter_by(user_id=user_id).first()
+            return UserEntity(
+                user_id=db_user.user_id,
+                microsoft_id=db_user.microsoft_id,
+                name=db_user.name,
+                photo=db_user.photo,
+                notes=db_user.notes
+            )
+        except Exception:
+            return None

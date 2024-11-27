@@ -31,7 +31,7 @@ class AvailabilityRepository:
 
     def get_availability_by_user_id(self, user_id: str) -> list[AvailabilityEntity]:
         availability =  self.db.query(Availability).filter_by(user_id=user_id).all()
-        user = self.user_repo.get_user_by_id(user_id)
+        user = self.user_repo.get_by_id(user_id)
 
         entities = []
         for a in availability:
