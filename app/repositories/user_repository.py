@@ -28,4 +28,3 @@ class UserRepository(IUserRepository):
                 photo=db_user.photo,
                 notes=db_user.notes
             )
-
