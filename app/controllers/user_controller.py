@@ -6,7 +6,7 @@ class CreateUserController:
     
     def __init__(self, service: UserService):
         self.service = service
-        
+
     def handle(self, data: CreateUserSchema) -> dict:
         try:
             user = self.service.execute(
@@ -15,6 +15,10 @@ class CreateUserController:
                 photo=data.photo,
                 notes=data.notes
             )
-            return {"user_id": user.user_id, "message": "User created successfully"}
+            return {
+                "user_id": user.user_id,
+                "message": "User created successfully"
+            }
+
         except ValueError as e:
             raise HTTPException(status_code=400, detail=f"Error creating user: {str(e)}")

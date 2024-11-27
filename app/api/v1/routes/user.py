@@ -1,14 +1,15 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+
+from app.core.database import get_db
 from app.schemas.user import CreateUserSchema, UserResponseSchema
 from app.services.user_service import UserService
 from app.controllers.user_controller import CreateUserController
-from app.core.database import get_db
 
 
 router = APIRouter()
 
-def get_create_user_controller(db: Session = Depends(get_db)) -> CreateUserController: # type: ignore
+def get_create_user_controller(db: Session = Depends(get_db)) -> CreateUserController:
     service = UserService(db)
     return CreateUserController(service)
 
@@ -22,3 +23,4 @@ def create_user(
 @router.get('/health', response_model=dict)
 def health() -> dict:
     return {'status': 'ok', 'uptime': 'running'}
+

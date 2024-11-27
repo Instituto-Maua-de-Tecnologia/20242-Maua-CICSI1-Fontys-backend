@@ -12,11 +12,12 @@ class UserService:
                     photo: str = None,
                     notes: str = None
                     ) -> UserEntity:
-        
+
         user = UserEntity(
             name=name,
-            microsoft_id=microsoft_id,
+            microsoft_id=microsoft_id or None,
             photo=photo,
             notes=notes
         )
+
         return self.repository.create_user(user)

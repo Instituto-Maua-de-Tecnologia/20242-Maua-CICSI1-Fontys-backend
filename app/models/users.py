@@ -19,5 +19,6 @@ class User(Base):
     availability = relationship("Availability", back_populates="user")
     user_shipping = relationship("UserShipping", back_populates="user")
     schedule = relationship("Schedule", back_populates="user")
+    coordination = relationship("Coordination", back_populates="user") 
 
     
