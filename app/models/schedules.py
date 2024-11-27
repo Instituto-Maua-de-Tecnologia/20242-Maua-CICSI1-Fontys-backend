@@ -4,7 +4,7 @@ from app.core.database import Base
 
 class Schedule(Base):
     __tablename__ = "schedules"
-    
+
     schedule_id = Column(String, primary_key=True, index=True)
     user_id = Column(String, ForeignKey('users.user_id'), nullable=False)
     course_id = Column(String, ForeignKey('courses.course_id'), nullable=False)
@@ -12,7 +12,7 @@ class Schedule(Base):
     subject_code = Column(String, ForeignKey('subjects.subject_code'), nullable=False)
     semester_number = Column(Integer, ForeignKey('semesters.semester_number'), nullable=False)
     created_at = Column(DateTime, nullable=False)
-    
+
     user = relationship("User", back_populates="schedule")
     course = relationship("Course", back_populates="schedule")
     subject = relationship("Subject", back_populates="schedule")
