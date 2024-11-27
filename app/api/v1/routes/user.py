@@ -3,11 +3,12 @@ from sqlalchemy.orm import Session
 from app.schemas.user import CreateUserSchema, UserResponseSchema
 from app.services.user_service import UserService
 from app.controllers.user_controller import CreateUserController
-from app.core.database import get_db  
+from app.core.database import get_db
+
 
 router = APIRouter()
 
-def get_create_user_controller(db: Session = Depends(get_db)) -> CreateUserController:
+def get_create_user_controller(db: Session = Depends(get_db)) -> CreateUserController: # type: ignore
     service = UserService(db)
     return CreateUserController(service)
 
