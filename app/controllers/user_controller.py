@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from app.schemas.user import CreateUserSchema
-from app.services.user_service import UserService
+from app.services.register_user_service import UserService
 
 class CreateUserController:
     
