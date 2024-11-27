@@ -1,5 +1,5 @@
-from week import Week
-from subject_count import SubjectCount
+from app.schemas.week import Week
+from app.schemas.subject_count import SubjectCount
 
 class ScheduleGenerator:
 

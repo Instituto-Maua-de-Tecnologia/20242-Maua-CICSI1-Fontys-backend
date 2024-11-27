@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 
-from app.enums.time_slot import TimeSlot
 from app.enums.availability_values import Values
 
 

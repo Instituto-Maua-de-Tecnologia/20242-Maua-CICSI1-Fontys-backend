@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional
 from app.domain.entities.schedule_entity import ScheduleEntity
 
-class IUserRepository(ABC):
+class IScheduleRepository(ABC):
     @abstractmethod
     def upload_schedule(self, ScheduleEntity: str) -> Optional[str]:
         pass

@@ -1,10 +1,13 @@
 from sqlalchemy.orm import Session
-from app.repositories.user_repository import UserRepository
-from app.domain.entities.user_entity import UserEntity
+from app.repositories.schedule_repository import ScheduleRepository
+from app.domain.entities.schedule_entity import ScheduleEntity
 
 class ScheduleService:
     def __init__(self, db: Session):
-        self.repository = UserRepository(db)
+        self.repository = ScheduleRepository(db)
 
-    def register_user(self, user_data: UserEntity):
-        return self.repository.create_user(user_data)
+    def upload_schedule(self, schedule_data: ScheduleEntity):
+        return self.repository.upload_schedule(schedule_data)
+
+    def get_schedule_by_id(self, schedule_id):
+        return self.repository.get_schedule_by_id(schedule_id)
