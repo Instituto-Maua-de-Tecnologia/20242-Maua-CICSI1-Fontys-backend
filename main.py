@@ -2,11 +2,9 @@ from fastapi import FastAPI
 from app.api.v1.routes import user
 import uvicorn
 from app.core.database import Base, engine
-from app.models import users, user_types, type_users  
 
 def init_models():
     Base.metadata.create_all(bind=engine)
-
 
 app = FastAPI(
     title="User Management API",
@@ -14,9 +12,7 @@ app = FastAPI(
     description="API for managing users."
 )
 
-
 init_models()
-
 
 app.include_router(user.router, prefix="/api", tags=["users"])
 
