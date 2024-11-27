@@ -7,7 +7,7 @@ from app.enums.days_of_week import DayOfWeek
 
 
 class SlotEntity(BaseModel):
-    slot_id: Optional[int] = True
+    slot_id: Optional[int] = None
     day_of_week: DayOfWeek
     time: DateTime
 

@@ -6,7 +6,7 @@ from app.domain.entities.user_entity import UserEntity
 from app.enums.availability_values import AvailabilityValues
 
 class AvailabilityEntity(BaseModel):
-    availability_id: Optional[str] = True
+    availability_id: Optional[str] = None
     user: UserEntity
     slot: SlotEntity
     value: AvailabilityValues
