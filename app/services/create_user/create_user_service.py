@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from app.repositories.user_repository import UserRepository
 from app.domain.entities.user_entity import UserEntity
 
-class UserService:
+class CreateUserService:
     def __init__(self, db: Session):
         self.repository = UserRepository(db)
 
@@ -21,3 +21,4 @@ class UserService:
         )
 
         return self.repository.create_user(user)
+        
