@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from app.services.get_all_users import GetAllUsersService
+from app.services.get_all_users.get_all_users_service import GetAllUsersService
 from app.schemas.user import GetAllUsersResponseSchema
 
 
