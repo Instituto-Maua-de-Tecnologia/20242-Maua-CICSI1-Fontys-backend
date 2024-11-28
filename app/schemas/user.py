@@ -16,5 +16,4 @@ class GetAllUsersResponseSchema(BaseModel):
     microsoft_id: str
     name: str
     photo: Optional[str] = None
-    notes: Optional[str] = None
     status: str

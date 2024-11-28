@@ -19,7 +19,6 @@ class GetAllUsersController:
                     microsoft_id=user.microsoft_id,
                     name=user.name,
                     photo=user.photo,
-                    notes=user.notes,
                     status=user.status
                 )
                 for user in users

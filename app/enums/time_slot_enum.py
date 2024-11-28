@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class TimeSlot(Enum):
+class TimeSlotEnum(Enum):
     FIRST_CLASS = '07:40 - 09:20'
     SECOND_CLASS = '09:30 - 11:10'
     THIRD_CLASS = '11:20 - 13:00'

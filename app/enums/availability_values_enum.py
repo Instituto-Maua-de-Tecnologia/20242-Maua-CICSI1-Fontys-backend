@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class AvailabilityValues(Enum):
+class AvailabilityValuesEnum(Enum):
     POSSIBLE = "Possible",
     IMPOSITIVE = "Impossible",
     NEGOCIATED= "Negociated",

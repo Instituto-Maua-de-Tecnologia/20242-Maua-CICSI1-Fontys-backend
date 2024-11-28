@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel
 
-from app.enums.user_type import UserType
+from app.enums.type_user_enum import UserType
 
 
 class TypeUserBase(BaseModel):

@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class StatusType(Enum):
+class StatusTypeEnum(Enum):
     SENT = 'Sent'
     UNSENT = 'Unsent'
     VERIFIED = 'Verified'
