@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 
-from app.controllers.get_all_users.get_all_users_controller import GetAllUsersController
+from app.controllers.user_controller.get_all_users_controller import GetAllUsersController
 from app.core.database import get_db
 from app.schemas.user import CreateUserSchema, UserResponseSchema
-from app.services.create_user.create_user_service import CreateUserService
-from app.controllers.create_user.create_user_controller import CreateUserController
-from app.services.get_all_users.get_all_users_service import GetAllUsersService
+from app.services.user_services.create_user_service import CreateUserService
+from app.controllers.user_controller.create_user_controller import CreateUserController
+from app.services.user_services.get_all_users_service import GetAllUsersService
 
 
 router = APIRouter()
