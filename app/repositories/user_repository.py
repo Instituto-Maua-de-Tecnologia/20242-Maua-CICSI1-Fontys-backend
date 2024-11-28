@@ -1,4 +1,5 @@
 from uuid import uuid4
+from app.models.type_users import TypeUser
 from app.models.user_types import UserType
 from sqlalchemy.orm import aliased
 from sqlalchemy.orm import Session
@@ -46,26 +47,34 @@ class UserRepository(IUserRepository):
             )
             
     def get_all_users(self) -> list[GetAllUsersResponseSchema]:
-        # Criar um alias para a tabela UserShipping, caso seja necessário
         user_shipping_alias = aliased(UserShipping)
+        user_type_alias = aliased(UserType)
+        type_alias = aliased(TypeUser)
 
-        # Realizar a junção entre as tabelas User e UserShipping
         db_users = (
-            self.db.query(User, user_shipping_alias.status)
+            self.db.query(
+                User.user_id,
+                User.microsoft_id,
+                User.name,
+                User.photo,
+                user_shipping_alias.status,
+            )
+            .join(user_type_alias, User.user_id == user_type_alias.user_id)
+            .join(type_alias, user_type_alias.type_id == type_alias.type_id)
             .join(user_shipping_alias, User.user_id == user_shipping_alias.user_id)
+            .filter(type_alias.name == "Professor")  
             .all()
         )
-        
-        # Mapeando os resultados para a estrutura de UserResponseSchema com status
+
         return [
             GetAllUsersResponseSchema(
-                user_id=user.user_id,
-                microsoft_id=user.microsoft_id,
-                name=user.name,
-                photo=user.photo,
-                notes=user.notes,
-                image_url=user.photo if user.photo else None,
-                status=user_shipping_alias.status  # Pega o status da tabela UserShipping
+                user_id=user_id,
+                microsoft_id=microsoft_id,
+                name=name,
+                photo=photo,
+                status=status,  
             )
-            for user, status in db_users
+            for user_id, microsoft_id, name, photo, status in db_users
         ]
+            
+ 
