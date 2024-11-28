@@ -10,3 +10,11 @@ class CreateUserSchema(BaseModel):
 class UserResponseSchema(BaseModel):
     user_id: str
     message: str
+    
+class GetAllUsersResponseSchema(BaseModel):
+    user_id: str
+    microsoft_id: str
+    name: str
+    photo: Optional[str] = None
+    notes: Optional[str] = None
+    status: str
