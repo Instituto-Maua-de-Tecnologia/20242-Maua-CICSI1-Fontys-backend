@@ -2,7 +2,7 @@
 from pydantic import BaseModel
 from datetime import date
 
-from app.enums.status_type import StatusType
+from app.enums.status_type_enum import StatusType
 
 class UserShippingBase(BaseModel):
     shipping_id: str
