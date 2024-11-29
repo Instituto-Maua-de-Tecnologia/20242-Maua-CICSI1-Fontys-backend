@@ -1,7 +1,8 @@
-from week import Week
-from subject_count import SubjectCount
+from app.schemas.week import Week
+from app.schemas.subject_count import SubjectCount
+from app.domain.interfaces.repositories.schedule_generator_interface import IScheduleGenerator
 
-class ScheduleGenerator:
+class ScheduleGenerator(IScheduleGenerator):
 
     def order_schedule(self, list_available_teacher_subject_times, list_of_subjects, semester):
         """
