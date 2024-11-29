@@ -1,6 +1,6 @@
 from enum import Enum
 
-class UserType(Enum):
+class TypeUserEnum(Enum):
     SECRETARY = "Secretary"
     PROFESSOR = "Profesor"
     COORDINATOR = "Coordinator"
