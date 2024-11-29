@@ -1,6 +1,6 @@
 import pytest
-from app.schemas.week import Week, DayOfWeek
-from app.schemas.day import TimeSlot, SubjectTime
+from app.schemas.week import Week, DayOfWeekEnum
+from app.schemas.day import TimeSlotEnum, SubjectTime
 from app.services.schedule_generator import ScheduleGenerator
 
 
@@ -15,10 +15,10 @@ def setup_week():
 def setup_subject_times():
     # Mocking available subject times and list of subjects
     subject_times = [
-        SubjectTime(time_slot=TimeSlot.FIRST_CLASS, day=DayOfWeek.MONDAY),
-        SubjectTime(time_slot=TimeSlot.SECOND_CLASS, day=DayOfWeek.TUESDAY),
-        SubjectTime(time_slot=TimeSlot.THIRD_CLASS, day=DayOfWeek.THURSDAY),
-        SubjectTime(time_slot=TimeSlot.SECOND_CLASS, day=DayOfWeek.MONDAY)
+        SubjectTime(time_slot=TimeSlotEnum.FIRST_CLASS, day=DayOfWeekEnum.MONDAY),
+        SubjectTime(time_slot=TimeSlotEnum.SECOND_CLASS, day=DayOfWeekEnum.TUESDAY),
+        SubjectTime(time_slot=TimeSlotEnum.THIRD_CLASS, day=DayOfWeekEnum.THURSDAY),
+        SubjectTime(time_slot=TimeSlotEnum.SECOND_CLASS, day=DayOfWeekEnum.MONDAY)
     ]
 
     # Setting subject and professor information
@@ -33,10 +33,10 @@ def setup_subject_times():
 @pytest.fixture
 def setup_single_subject_times():
     single_subject_times = [
-        SubjectTime(time_slot=TimeSlot.FIRST_CLASS, day=DayOfWeek.MONDAY),
-        SubjectTime(time_slot=TimeSlot.SECOND_CLASS, day=DayOfWeek.TUESDAY),
-        SubjectTime(time_slot=TimeSlot.THIRD_CLASS, day=DayOfWeek.THURSDAY),
-        SubjectTime(time_slot=TimeSlot.SECOND_CLASS, day=DayOfWeek.MONDAY)
+        SubjectTime(time_slot=TimeSlotEnum.FIRST_CLASS, day=DayOfWeekEnum.MONDAY),
+        SubjectTime(time_slot=TimeSlotEnum.SECOND_CLASS, day=DayOfWeekEnum.TUESDAY),
+        SubjectTime(time_slot=TimeSlotEnum.THIRD_CLASS, day=DayOfWeekEnum.THURSDAY),
+        SubjectTime(time_slot=TimeSlotEnum.SECOND_CLASS, day=DayOfWeekEnum.MONDAY)
     ]
 
     # Setting subject and professor information
@@ -77,11 +77,11 @@ def test_sort_list_of_subjects_by_subject_frequency(schedule_generator, setup_su
 
     # Adding extra subjects to increase frequency of "Math" and "Science"
     subject_times.append(
-        SubjectTime(TimeSlot.SECOND_CLASS, DayOfWeek.MONDAY))
+        SubjectTime(TimeSlotEnum.SECOND_CLASS, DayOfWeekEnum.MONDAY))
     subject_times.append(
-        SubjectTime(TimeSlot.FIRST_CLASS, DayOfWeek.WEDNESDAY))
+        SubjectTime(TimeSlotEnum.FIRST_CLASS, DayOfWeekEnum.WEDNESDAY))
     subject_times.append(
-        SubjectTime(TimeSlot.FIRST_CLASS, DayOfWeek.WEDNESDAY))
+        SubjectTime(TimeSlotEnum.FIRST_CLASS, DayOfWeekEnum.WEDNESDAY))
 
     subject_times[4].set_subject_info("Math", "ProfA")
     subject_times[5].set_subject_info("Science", "ProfB")

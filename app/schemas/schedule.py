@@ -1,8 +1,6 @@
 from pydantic import BaseModel
 from sqlalchemy import DateTime
 
-from app.enums.days_of_week_enum import DayOfWeek
-
 
 class ScheduleBase(BaseModel):
     schedule_id: str
