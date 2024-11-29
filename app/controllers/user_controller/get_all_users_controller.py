@@ -9,10 +9,10 @@ class GetAllUsersController:
 
     def handle(self) -> list[GetAllUsersResponseSchema]:
         try:
-            # Executa o serviço para buscar todos os usuários
+            
             users = self.service.execute()
             
-            # Mapeia os usuários para o schema de resposta
+            
             return [
                 GetAllUsersResponseSchema(
                     user_id=user.user_id,
@@ -25,5 +25,5 @@ class GetAllUsersController:
             ]
 
         except Exception as e:
-            # Lança uma exceção HTTP em caso de erro inesperado
+           
             raise HTTPException(status_code=500, detail=f"Error fetching users: {str(e)}")

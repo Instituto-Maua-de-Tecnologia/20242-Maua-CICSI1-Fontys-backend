@@ -1,3 +1,4 @@
+from uuid import uuid4
 from sqlalchemy import Column, Integer, String
 from app.core.database import Base
 from sqlalchemy.orm import relationship
