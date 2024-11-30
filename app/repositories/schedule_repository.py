@@ -41,3 +41,34 @@ class ScheduleRepository(IScheduleRepository):
                 created_at=db_schedule.created_at
             )
         return None
+    
+    def create_schedule(self, schedule: ScheduleEntity) -> ScheduleEntity:
+        # Criação do cronograma no banco de dados
+        db_schedule = Schedule(
+            name=schedule.name,
+            professor_id=schedule.professor_id,
+            course_id=schedule.course_id,
+            semester=schedule.semester,
+            schedule_data=schedule.schedule_data  # Exemplo de campo de dados do cronograma
+        )
+        
+        try:
+            # Adiciona o cronograma ao banco de dados
+            self.db.add(db_schedule)
+            self.db.commit()
+            self.db.refresh(db_schedule)
+                    
+        except Exception as e:
+            # Se ocorrer algum erro, faz rollback da transação
+            self.db.rollback()
+            raise RuntimeError("Error creating schedule.") from e
+        
+        # Retorna o cronograma criado e seu tipo associado
+        return ScheduleEntity(
+            schedule_id=db_schedule.schedule_id,
+            name=db_schedule.name,
+            professor_id=db_schedule.professor_id,
+            course_id=db_schedule.course_id,
+            semester=db_schedule.semester,
+            schedule_data=db_schedule.schedule_data
+        )
