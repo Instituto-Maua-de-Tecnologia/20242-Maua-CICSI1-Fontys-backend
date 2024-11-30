@@ -24,5 +24,7 @@ def get_availability(user_id: str = Query(...), db: Session = Depends(get_db)):
 
 @router.post("/availability/", response_model=List[AvailabilityBase])
 def set_availability(data: SetAvailabilityRequest, db: Session = Depends(get_db)):
-    raise Exception("not implemented")
+    service = AvailabilityService(db)
+    availability = service.set_availability(data.availabilities, data.user_id)
+    return availability
 
