@@ -1,3 +1,4 @@
+from uuid import uuid4
 from sqlalchemy import Column, DateTime, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from app.core.database import Base
@@ -5,7 +6,7 @@ from app.core.database import Base
 class Schedule(Base):
     __tablename__ = "schedules"
 
-    schedule_id = Column(String, primary_key=True, index=True)
+    schedule_id = Column(String, primary_key=True, index=True, default=lambda: str(uuid4()))
     user_id = Column(String, ForeignKey('users.user_id'), nullable=False)
     course_id = Column(String, ForeignKey('courses.course_id'), nullable=False)
     slot_id = Column(Integer, ForeignKey('slots.slot_id'), nullable=False)

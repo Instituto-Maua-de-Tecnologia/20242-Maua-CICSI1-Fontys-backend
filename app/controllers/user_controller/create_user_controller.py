@@ -1,10 +1,11 @@
 from fastapi import HTTPException
 from app.schemas.user import CreateUserSchema
-from app.services.user_service import UserService
+from app.services.user_services.create_user_service import CreateUserService
+
 
 class CreateUserController:
     
-    def __init__(self, service: UserService):
+    def __init__(self, service: CreateUserService):
         self.service = service
 
     def handle(self, data: CreateUserSchema) -> dict:

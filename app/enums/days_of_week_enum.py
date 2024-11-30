@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class DayOfWeek(Enum):
+class DayOfWeekEnum(Enum):
     MONDAY = "Monday"
     TUESDAY = "Tuesday"
     WEDNESDAY = "Wednesday"

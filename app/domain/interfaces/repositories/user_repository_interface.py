@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import List, Optional
 from app.domain.entities.user_entity import UserEntity
 
 class IUserRepository(ABC):
@@ -10,4 +10,8 @@ class IUserRepository(ABC):
 
     @abstractmethod
     def get_by_id(self, user_id: str) -> Optional[UserEntity]:
+        pass
+
+    @abstractmethod
+    def get_all_users(self) -> List[UserEntity]:
         pass

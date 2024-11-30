@@ -1,11 +1,11 @@
 
 from pydantic import BaseModel
-from sqlalchemy import Date
+from datetime import date
 
-from app.enums.status_type import StatusType
+from app.enums.status_type_enum import StatusTypeEnum
 
 class UserShippingBase(BaseModel):
     shipping_id: str
     user_id: str
-    shipping_date: Date
-    status: StatusType
+    shipping_date: date
+    status: StatusTypeEnum
