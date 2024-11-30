@@ -36,10 +36,11 @@ class AvailabilityService:
                 existing.value = a.value
                 changes.updates.append(existing)
             else:
-                changes.updates.append(AvailabilityEntity(user=user, slot=SlotEntity(slot_id=a.slot_id), value=a.value))
+                slot = SlotEntity(slot_id=a.slot_id)
+                changes.updates.append(AvailabilityEntity(user=user, slot=slot, value=a.value))
 
         for c in current_availabilities:
-            if c.slot_id not in incoming_map:
+            if c.slot.slot_id not in incoming_map:
                 changes.deletions.append(c)
 
         return self.availability_repository.apply_changes(changes, user_id)

@@ -25,12 +25,10 @@ class AvailabilityRepository:
                 user_id=user_id,
                 availability_value=update.value
             )
-            to_update.append(record)
+            self.db.merge(record)
 
         for delete in changes.deletions:
             to_delete.append(delete.availability_id)
-        if to_update:
-            self.db.bulk_save_objects(to_update)
 
         if to_delete:
             (self.db.query(Availability)
@@ -38,7 +36,8 @@ class AvailabilityRepository:
              .delete(synchronize_session=False))
 
         self.db.commit()
-        return changes.updates + changes.additions
+
+        return changes.updates
 
     def get_availability_by_user_id(self, user_id: str) -> list[AvailabilityEntity]:
         availability =  self.db.query(Availability).filter_by(user_id=user_id).all()

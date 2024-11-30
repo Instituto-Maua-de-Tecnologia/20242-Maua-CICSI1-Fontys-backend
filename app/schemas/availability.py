@@ -10,6 +10,10 @@ class AvailabilityBase(BaseModel):
     slot_id: int
     value: AvailabilityValuesEnum
 
+class AvailabilityResponseSchema(BaseModel):
+    slot_id: int
+    value: AvailabilityValuesEnum
+
 class GetUserAvailabilityRequest(BaseModel):
     user_id: str
 
