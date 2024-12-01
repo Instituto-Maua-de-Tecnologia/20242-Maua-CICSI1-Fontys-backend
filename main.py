@@ -5,6 +5,7 @@ from app.api.v1.routes import schedule
 from app.api.v1.routes import slots
 import uvicorn
 from app.core.database import Base, engine
+from fastapi.middleware.cors import CORSMiddleware
 
 def init_models():
     Base.metadata.create_all(bind=engine)
@@ -13,6 +14,14 @@ app = FastAPI(
     title="User Management API",
     version="1.0.0",
     description="API for managing users."
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 init_models()
