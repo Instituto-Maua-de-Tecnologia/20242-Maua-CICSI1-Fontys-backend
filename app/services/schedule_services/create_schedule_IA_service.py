@@ -1,6 +1,7 @@
 import google.generativeai as genai
 from app.domain.entities.schedule_entity import ScheduleEntity
 from app.domain.interfaces.repositories.schedule_repository_interface import IScheduleRepository
+from app.core.config import settings
 
 class CreateScheduleIAService:
     def __init__(self, repository: IScheduleRepository):
@@ -38,9 +39,10 @@ class CreateScheduleIAService:
         :param data: Dados do cronograma a ser gerado.
         :return: Dados do cronograma sugerido pela API.
         """
+        API_KEY = settings.API_KEY
         try:
             # Configura a chave da API do Gemini
-            genai.configure(api_key="YOUR_API_KEY")
+            genai.configure(api_key=API_KEY)
             model = genai.GenerativeModel("gemini-1.5-flash")
             
             # Envia um prompt personalizado com os dados do cronograma para a API
