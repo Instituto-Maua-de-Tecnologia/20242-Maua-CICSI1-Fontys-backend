@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.api.v1.routes import user
 from app.api.v1.routes import availability
 from app.api.v1.routes import schedule
+from app.api.v1.routes import slots
 import uvicorn
 from app.core.database import Base, engine
 
@@ -19,6 +20,7 @@ init_models()
 app.include_router(user.router, prefix="/api", tags=["users"])
 app.include_router(availability.router, prefix="/api", tags=["availability"])
 app.include_router(schedule.router, prefix="/api", tags=["schedule"])
+app.include_router(slots.router, prefix="/api", tags=["slots"])
 
 @app.get("/")
 async def read_root():
