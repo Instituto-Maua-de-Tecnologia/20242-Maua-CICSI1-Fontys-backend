@@ -47,29 +47,26 @@ class UserRepository(IUserRepository):
             )
             
     def get_all_professors(self) -> list[GetAllProfessorsResponseSchema]:
-
         db_users = (
             self.db.query(
-               User.name,
-               User.user_id,
-               UserShipping.status
+                User.user_id,
+                User.name,
+                TypeUser.type_name,
+                UserShipping.status
             )
-            .join(User.user_type)
-            .join(TypeUser.user_type)
-            .join(User.user_shipping)
-            .filter(TypeUser.type_name == "PROFESSOR")  
-            .all()
+            .outerjoin(UserType, User.user_id == UserType.user_id)
+            .outerjoin(TypeUser, UserType.type_id == TypeUser.type_id)
+            .outerjoin(UserShipping, User.user_id == UserShipping.user_id)
+            .filter(TypeUser.type_id == '1')
         )
-
         return [
             GetAllProfessorsResponseSchema(
                 user_id=user_id,
-                microsoft_id=microsoft_id,
                 name=name,
-                photo=photo,
-                status=status,  
+                type_name=type_name,
+                status=status,
             )
-            for user_id, microsoft_id, name, photo, status in db_users
+            for user_id, name, type_name, status in db_users
         ]
-            
- 
+
+  
