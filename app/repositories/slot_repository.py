@@ -14,3 +14,10 @@ class SlotRepository:
             day_of_week=slot.day_of_week,
             time=slot.time
         )
+
+    def get_all(self) -> list[SlotEntity]:
+        slots = self.db.query(Slot).all()
+        entities = []
+        for s in slots:
+            entities.append(SlotEntity(slot_id=s.slot_id, day_of_week=s.day_of_week, time=s.time))
+        return entities
