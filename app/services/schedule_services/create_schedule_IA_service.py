@@ -44,9 +44,9 @@ class CreateScheduleIAService:
             # Configura a chave da API do Gemini
             genai.configure(api_key=API_KEY)
             model = genai.GenerativeModel("gemini-1.5-flash")
-            
+            print(data.dict())
             # Envia um prompt personalizado com os dados do cronograma para a API
-            prompt = f"Generate a schedule based on the following details: {data.dict()}"
+            prompt = f"Gere um cronograma com os seguintes detalhes, alterando apenas : {data.dict()}"
             response = model.generate_content(prompt)
             
             # Verifica o sucesso da resposta
