@@ -10,3 +10,6 @@ class IScheduleRepository(ABC):
     @abstractmethod
     def get_schedule_by_id(self, id: str) -> ScheduleEntity:
         pass
+    
+    def create_schedule(self, schedule: ScheduleEntity) -> None:
+        pass

@@ -5,10 +5,12 @@ load_dotenv()
 
 class Settings(BaseSettings):
     DATABASE_URL_AIVEN: str
+    API_KEY: str
 
     class Config:
         env_file = ".env"
 
 settings = Settings(
-    DATABASE_URL_AIVEN=os.environ.get('DATABASE_URL_AIVEN')
+    DATABASE_URL_AIVEN=os.environ.get('DATABASE_URL_AIVEN'),
+    API_KEY=os.environ.get('API_KEY')
 )
