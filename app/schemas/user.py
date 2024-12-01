@@ -15,7 +15,6 @@ class UserResponseSchema(BaseModel):
     
 class GetAllProfessorsResponseSchema(BaseModel):
     user_id: str
-    microsoft_id: str
     name: str
-    photo: Optional[str] = None
-    status: StatusTypeEnum
+    type_name: str
+    status: Optional[StatusTypeEnum] = None  
