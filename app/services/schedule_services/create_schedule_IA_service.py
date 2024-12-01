@@ -46,7 +46,7 @@ class CreateScheduleIAService:
             model = genai.GenerativeModel("gemini-1.5-flash")
             print(data.dict())
             # Envia um prompt personalizado com os dados do cronograma para a API
-            prompt = f"Gere um cronograma com os seguintes detalhes, alterando apenas : {data.dict()}"
+            prompt = f"Gere um cronograma com os seguintes detalhes, alterando apenas a disponibilidade de cada user para cada slot, obs: é necessário que o user tenha disponibilidade: {data.dict()}"
             response = model.generate_content(prompt)
             
             # Verifica o sucesso da resposta
