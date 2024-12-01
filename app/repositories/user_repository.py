@@ -5,11 +5,11 @@ from app.models.user_types import UserType
 from sqlalchemy.orm import aliased
 from sqlalchemy.orm import Session
 from app.models.user_shipping import UserShipping
-from app.models.users import User  # Modelo do banco de dados
+from app.models.users import User  
 
 from app.domain.interfaces.repositories.user_repository_interface import IUserRepository
 from app.domain.entities.user_entity import UserEntity
-from app.schemas.user import GetAllUsersResponseSchema  # Entidade de domínio
+from app.schemas.user import GetAllProfessorsResponseSchema
 
 class UserRepository(IUserRepository):
     def __init__(self, db: Session):
@@ -46,47 +46,25 @@ class UserRepository(IUserRepository):
                 photo=db_user.photo,
                 notes=db_user.notes
             )
-
-    def get_by_id(self, user_id: str) -> Optional[UserEntity]:
-        try:
-            db_user = self.db.query(User).filter_by(user_id=user_id).first()
-            return UserEntity(
-                user_id=db_user.user_id,
-                microsoft_id=db_user.microsoft_id,
-                name=db_user.name,
-                photo=db_user.photo,
-                notes=db_user.notes
-            )
-        except Exception:
-            return None
-
-    def get_all_users(self) -> list[GetAllUsersResponseSchema]:
-        user_shipping_alias = aliased(UserShipping)
-        user_type_alias = aliased(UserType)
-        type_alias = aliased(TypeUser)
-
+    def get_all_professors(self) -> list[GetAllProfessorsResponseSchema]:
         db_users = (
             self.db.query(
                 User.user_id,
-                User.microsoft_id,
                 User.name,
-                User.photo,
-                user_shipping_alias.status,
+                TypeUser.type_name,
+                UserShipping.status
             )
-            .join(user_type_alias, User.user_id == user_type_alias.user_id)
-            .join(type_alias, user_type_alias.type_id == type_alias.type_id)
-            .join(user_shipping_alias, User.user_id == user_shipping_alias.user_id)
-            .filter(type_alias.name == "Professor")  
-            .all()
+            .outerjoin(UserType, User.user_id == UserType.user_id)
+            .outerjoin(TypeUser, UserType.type_id == TypeUser.type_id)
+            .outerjoin(UserShipping, User.user_id == UserShipping.user_id)
+            .filter(TypeUser.type_id == '1')
         )
-
         return [
-            GetAllUsersResponseSchema(
+            GetAllProfessorsResponseSchema(
                 user_id=user_id,
-                microsoft_id=microsoft_id,
                 name=name,
-                photo=photo,
-                status=status,  
+                type_name=type_name,
+                status=status,
             )
-            for user_id, microsoft_id, name, photo, status in db_users
+            for user_id, name, type_name, status in db_users
         ]

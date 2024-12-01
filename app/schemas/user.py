@@ -1,6 +1,8 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
+from app.enums.status_type_enum import StatusTypeEnum
+
 class CreateUserSchema(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     microsoft_id: Optional[str] = None 
@@ -11,9 +13,8 @@ class UserResponseSchema(BaseModel):
     user_id: str
     message: str
     
-class GetAllUsersResponseSchema(BaseModel):
+class GetAllProfessorsResponseSchema(BaseModel):
     user_id: str
-    microsoft_id: str
     name: str
-    photo: Optional[str] = None
-    status: str
+    type_name: str
+    status: Optional[StatusTypeEnum] = None  

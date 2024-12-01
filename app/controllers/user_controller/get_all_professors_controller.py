@@ -1,24 +1,22 @@
 from fastapi import HTTPException
-from app.services.user_services.get_all_users_service import GetAllUsersService
-from app.schemas.user import GetAllUsersResponseSchema
+from app.services.user_services.get_all_professors_service import GetAllProfessorsService
+from app.schemas.user import GetAllProfessorsResponseSchema
 
-
-class GetAllUsersController:
-    def __init__(self, service: GetAllUsersService):
+class GetAllProfessorsController:
+    def __init__(self, service: GetAllProfessorsService):
         self.service = service
 
-    def handle(self) -> list[GetAllUsersResponseSchema]:
+    def handle(self) -> list[GetAllProfessorsResponseSchema]:
         try:
             
             users = self.service.execute()
             
             
             return [
-                GetAllUsersResponseSchema(
+                GetAllProfessorsResponseSchema(
                     user_id=user.user_id,
-                    microsoft_id=user.microsoft_id,
                     name=user.name,
-                    photo=user.photo,
+                    type_name=user.type_name,
                     status=user.status
                 )
                 for user in users

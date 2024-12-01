@@ -13,5 +13,5 @@ class IUserRepository(ABC):
         pass
 
     @abstractmethod
-    def get_all_users(self) -> List[UserEntity]:
+    def get_all_professors(self) -> List[UserEntity]:
         pass
