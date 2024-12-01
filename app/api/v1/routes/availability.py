@@ -7,7 +7,8 @@ from app.controllers.availability_controller.get_availability_controller import 
 from app.controllers.availability_controller.set_availability_controller import SetAvailabilityController
 from app.core.database import SessionLocal
 from app.schemas.availability import  SetAvailabilityRequest, AvailabilityResponseSchema
-from app.services.availability_service import AvailabilityService
+from app.services.avaialability_services.set_availability_service import SetAvailabilityService
+from app.services.avaialability_services.get_user_availability_service import GetUserAvailabilityService
 
 router = APIRouter()
 
@@ -20,11 +21,11 @@ def get_db():
 
 
 def get_availability_controller(db: Session = Depends(get_db)) -> GetAvailabilityController:
-    service = AvailabilityService(db)
+    service = GetUserAvailabilityService(db)
     return GetAvailabilityController(service)
 
 def set_availability_controller(db: Session = Depends(get_db)) -> SetAvailabilityController:
-    service = AvailabilityService(db)
+    service = SetAvailabilityService(db)
     return SetAvailabilityController(service)
 
 @router.get("/availability/", response_model=List[AvailabilityResponseSchema])
