@@ -15,9 +15,8 @@ class GetAllProfessorsController:
             return [
                 GetAllProfessorsResponseSchema(
                     user_id=user.user_id,
-                    microsoft_id=user.microsoft_id,
                     name=user.name,
-                    photo=user.photo,
+                    type_name=user.type_name,
                     status=user.status
                 )
                 for user in users
