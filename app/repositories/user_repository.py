@@ -1,3 +1,4 @@
+from typing import Optional
 from uuid import uuid4
 from app.models.type_users import TypeUser
 from app.models.user_types import UserType
@@ -45,7 +46,6 @@ class UserRepository(IUserRepository):
                 photo=db_user.photo,
                 notes=db_user.notes
             )
-            
     def get_all_professors(self) -> list[GetAllProfessorsResponseSchema]:
         db_users = (
             self.db.query(
@@ -68,5 +68,3 @@ class UserRepository(IUserRepository):
             )
             for user_id, name, type_name, status in db_users
         ]
-
-  
