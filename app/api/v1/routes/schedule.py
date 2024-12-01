@@ -1,44 +1,22 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.services.schedule_generator import ScheduleGenerator
+from app.controllers.schedule_controller.create_schedule_IA_controller import CreateScheduleIAController
 from app.core.database import get_db
-from app.domain.entities.schedule_entity import ScheduleEntity
-from app.services.schedule_services.get_schedule_by_id_service import GetScheduleByIdService
-from app.services.schedule_services.upload_schedule_service import UploadScheduleService
-from app.controllers.schedule_controller.get_schedule_by_id_controller import GetScheduleByIdController
-from app.controllers.schedule_controller.upload_schedule_controller import UploadScheduleController
-import json
+from app.schemas.schedule import ScheduleResponseSchema
+from app.services.schedule_services.create_schedule_IA_service import CreateScheduleIAService
 
-ScheduleRouter = APIRouter(prefix="/schedule")
 
-def get_get_schedule_by_id_controller(db: Session = Depends(get_db)) -> GetScheduleByIdController:
-    service = GetScheduleByIdService(db)
-    return GetScheduleByIdController(service)
+router = APIRouter()
 
-def get_upload_schedule_controller(db: Session = Depends(get_db)) -> UploadScheduleController:
-    service = UploadScheduleService(db)
-    return UploadScheduleController(service)
+def get_create_schedule_IA_controller(db: Session = Depends(get_db)) -> CreateScheduleIAController:
+    service = CreateScheduleIAService(db)
+    return CreateScheduleIAController(service)
 
-@ScheduleRouter.post("/", )
-def generate_schedule(available_teacher_times, subjects, semester):
-    return [
-        json.dumps(ScheduleGenerator.order_schedule(available_teacher_times, subjects, semester))
-    ]
 
-@ScheduleRouter.get("/getSchedule", )
-def get_schedule_by_id(
-        data: str,
-        controller: GetScheduleByIdController = Depends(get_get_schedule_by_id_controller)
-)-> ScheduleEntity :
+@router.post("/schedule_IA", response_model=ScheduleResponseSchema ,status_code=201)
+def create_schedule_IA(
+    data: ScheduleResponseSchema,
+    controller: CreateScheduleIAController = Depends(get_create_schedule_IA_controller)
+) -> ScheduleResponseSchema:
     return controller.handle(data)
-
-
-
-@ScheduleRouter.post("/uploadSchedule", )
-def upload_schedule(
-        data: ScheduleEntity,
-        controller: UploadScheduleController = Depends(get_upload_schedule_controller)
-)-> str :
-    return controller.handle(data)
-
