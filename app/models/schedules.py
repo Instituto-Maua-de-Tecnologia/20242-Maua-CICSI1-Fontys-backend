@@ -11,7 +11,7 @@ class Schedule(Base):
     course_id = Column(String, ForeignKey('courses.course_id'), nullable=False)
     slot_id = Column(Integer, ForeignKey('slots.slot_id'), nullable=False)
     subject_code = Column(String, ForeignKey('subjects.subject_code'), nullable=False)
-    semester_number = Column(Integer, ForeignKey('semesters.semester_number'), nullable=False)
+    semester_id = Column(Integer, ForeignKey('semesters.semester_id'), nullable=False)
     created_at = Column(DateTime, nullable=False)
 
     user = relationship("User", back_populates="schedule")

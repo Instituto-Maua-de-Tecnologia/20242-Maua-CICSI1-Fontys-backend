@@ -14,3 +14,4 @@ class GetUserAvailabilityService:
 
     def get_user_availability(self, user_id: str) -> list[AvailabilityEntity]:
         return self.availability_repository.get_availability_by_user_id(user_id)
+

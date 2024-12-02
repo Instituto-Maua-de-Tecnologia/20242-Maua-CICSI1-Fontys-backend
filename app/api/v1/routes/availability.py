@@ -43,7 +43,7 @@ def set_availability(
 ) -> List[AvailabilityResponseSchema]:
     return controller.handle(data)
 
-@router.put("/availabilities", response_model=UpdateAvailabilityResponse, status_code=200)
+@router.put("/availability", response_model=UpdateAvailabilityResponse, status_code=200)
 def update_availabilities(
     data: UpdateAvailabilityRequest,
     controller: UpdateAvailabilityController = Depends(get_availability_controller)
