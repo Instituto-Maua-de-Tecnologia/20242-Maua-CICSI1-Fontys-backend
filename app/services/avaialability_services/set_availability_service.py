@@ -1,19 +1,20 @@
+from app.repositories.slot_repository import SlotRepository
+from app.repositories.user_repository import UserRepository
+from app.schemas.availability import AddAvailability, SetAvailability
+
 from sqlalchemy.orm.session import Session
 
 from app.domain.entities.availability_entity import AvailabilityEntity
 from app.domain.entities.slot_entity import SlotEntity
 from app.repositories.availability_repository import AvailabilityRepository
-from app.repositories.slot_repository import SlotRepository
-from app.repositories.user_repository import UserRepository
-from app.schemas.availability import AddAvailability, SetAvailability
 
-
-class AvailabilityService:
-    def __init__(self, db: Session) -> None:
+class SetAvailabilityService:
+    def __init__(self, db: Session):
         self.user_repository = UserRepository(db)
         self.slot_repository = SlotRepository(db)
         self.availability_repository = AvailabilityRepository(db, self.user_repository, self.slot_repository)
-
+        
+        
     def set_availability(self, availabilities: list[AddAvailability], user_id: str) -> list[AvailabilityEntity]:
         user = self.user_repository.get_by_id(user_id)
         current_availabilities = self.availability_repository.get_availability_by_user_id(user_id)
@@ -44,6 +45,3 @@ class AvailabilityService:
                 changes.deletions.append(c)
 
         return self.availability_repository.apply_changes(changes, user_id)
-
-    def get_user_availability(self, user_id: str) -> list[AvailabilityEntity]:
-        return self.availability_repository.get_availability_by_user_id(user_id)

@@ -1,11 +1,11 @@
 from app.schemas.slots import SlotBase
 from fastapi import HTTPException
-from app.services.slot_service import SlotService
+from app.services.slot_services.get_all_slots_service import GetAllSlotsService
 
 
-class GetSlotsController:
+class GetAllSlotsController:
 
-    def __init__(self, service: SlotService):
+    def __init__(self, service: GetAllSlotsService):
         self.service = service
 
     def handle(self) -> list[SlotBase]:

@@ -1,11 +1,11 @@
 from app.schemas.availability import AvailabilityResponseSchema, SetAvailabilityRequest
-from app.services.availability_service import AvailabilityService
+from app.services.avaialability_services.set_availability_service import SetAvailabilityService
 from fastapi import HTTPException, Query
 
 
 class SetAvailabilityController:
 
-    def __init__(self, service: AvailabilityService):
+    def __init__(self, service: SetAvailabilityService):
         self.service = service
 
     def handle(self, data: SetAvailabilityRequest) -> list[AvailabilityResponseSchema]:
