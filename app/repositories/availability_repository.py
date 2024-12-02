@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.domain.entities.availability_entity import AvailabilityEntity
 from app.models.availabilities import Availability
+from app.models.users import User
 from app.repositories.slot_repository import SlotRepository
 from app.repositories.user_repository import UserRepository
 from app.schemas.availability import SetAvailability
@@ -54,3 +55,32 @@ class AvailabilityRepository:
             )
             entities.append(a)
         return entities
+
+def update_availabilities(self, availabilities: list[AvailabilityEntity], notes: str, subjects: list[str]):
+        for availability in availabilities:
+            # Tenta buscar o registro existente no banco
+            record = self.db.query(Availability).filter_by(
+                user_id=availability.user_id,
+                slot_id=availability.slot.slot_id
+            ).first()
+
+            if record:
+                # Atualiza a disponibilidade existente
+                record.availability_value = availability.value
+            else:
+                # Cria uma nova disponibilidade, pois não existe
+                new_record = Availability(
+                    user_id=availability.user_id,
+                    slot_id=availability.slot.slot_id,
+                    availability_value=availability.value
+                )
+                self.db.add(new_record)
+
+        # Atualiza as observações e matérias associadas ao usuário
+        user_record = self.db.query(User).filter_by(user_id=availabilities[0].user_id).first()
+        if user_record:
+            user_record.notes = notes
+            user_record.subjects = subjects
+
+        # Confirma as alterações no banco de dados
+        self.db.commit()
