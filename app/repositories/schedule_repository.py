@@ -45,11 +45,12 @@ class ScheduleRepository(IScheduleRepository):
     def create_schedule(self, schedule: ScheduleEntity) -> ScheduleEntity:
         # Criação do cronograma no banco de dados
         db_schedule = Schedule(
-            name=schedule.name,
-            professor_id=schedule.professor_id,
             course_id=schedule.course_id,
-            semester=schedule.semester,
-            schedule_data=schedule.schedule_data  # Exemplo de campo de dados do cronograma
+            user_id=schedule.user_id,
+            slot_id=schedule.slot_id,
+            subject_code=schedule.subject_code,
+            semester_number=schedule.semester_number,
+            created_at=schedule.created_at 
         )
         
         try:
@@ -65,10 +66,10 @@ class ScheduleRepository(IScheduleRepository):
         
         # Retorna o cronograma criado e seu tipo associado
         return ScheduleEntity(
-            schedule_id=db_schedule.schedule_id,
-            name=db_schedule.name,
-            professor_id=db_schedule.professor_id,
             course_id=db_schedule.course_id,
-            semester=db_schedule.semester,
-            schedule_data=db_schedule.schedule_data
+            user_id=db_schedule.user_id,
+            slot_id=db_schedule.slot_id,
+            subject_code=db_schedule.subject_code,
+            semester_number=db_schedule.semester_number,
+            created_at=db_schedule.created_at
         )
