@@ -10,9 +10,10 @@ class UpdateAvailabilityController:
     def handle(self, request: UpdateAvailabilityRequest) -> UpdateAvailabilityResponse:
         try:
             return self.service.update_availabilities(
+                user_id=request.user_id,
                 availabilities=request.availabilities,
                 notes=request.notes,
-                subject_name=request.subject_name
+                subject_code=request.subject_code
             )
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))

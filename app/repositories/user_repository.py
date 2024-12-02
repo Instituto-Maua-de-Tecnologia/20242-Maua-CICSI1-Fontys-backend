@@ -3,7 +3,6 @@ from typing import Optional
 from uuid import uuid4
 from app.models.type_users import TypeUser
 from app.models.user_types import UserType
-from sqlalchemy.orm import aliased
 from sqlalchemy.orm import Session
 from app.models.user_shipping import UserShipping
 from app.models.users import User  

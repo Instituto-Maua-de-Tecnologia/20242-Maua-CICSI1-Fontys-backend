@@ -10,7 +10,7 @@ class Coordination(Base):
     coordination_id = Column(String, primary_key=True, index=True)
     course_id = Column(String, ForeignKey("courses.course_id"), nullable=False)
     user_id = Column(String, ForeignKey("users.user_id"), nullable=False)
-    semester_number = Column(Integer, ForeignKey("semesters.semester_number"), nullable=False)
+    semester_id = Column(Integer, ForeignKey("semesters.semester_id"), nullable=False)
     year = Column(String, nullable=False)
 
     course = relationship("Course", back_populates="coordination")

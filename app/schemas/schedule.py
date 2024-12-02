@@ -12,7 +12,7 @@ class CreateScheduleIASchema(BaseModel):
     slot_id: int
     subject_code: str
     number_semester: int
-    
+
 class CreateScheduleSchema(BaseModel):
     course_id: str
     user_id: str
@@ -20,13 +20,13 @@ class CreateScheduleSchema(BaseModel):
     subject_code: str
     semester_number: int
     created_at: str
-    
-    
+
+
 class ScheduleResponseSchema(BaseModel):
     schedule_id: str
     message: str
-    
-    
+
+
 class GenerateScheduleSchema(BaseModel):
     user_id: Optional[str]
     name : Optional[str]
@@ -37,4 +37,4 @@ class GenerateScheduleSchema(BaseModel):
     availability_value: Optional[str]
     subject_name: Optional[str]
     course_id: Optional[str]
-    semester_number: Optional[int]
+    semester_id: Optional[int]

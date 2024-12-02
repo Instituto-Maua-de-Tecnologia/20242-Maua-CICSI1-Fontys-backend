@@ -135,66 +135,66 @@ if __name__ == "__main__":
     print("Table subjects inserted")
     
     print("Inserting table semesters...")
-    # db_semesters = [
-    #     Semester(
-    #         semester_number=1,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[0].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=1,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[1].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=1,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[2].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=1,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[3].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=1,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[4].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=2,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[5].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=2,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[6].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=2,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[7].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=2,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[8].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=2,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[9].subject_code
-    #     ),
-    #     Semester(
-    #         semester_number=2,
-    #         course_id=db_courses[0].course_id,
-    #         subject_code=db_subjects[10].subject_code
-    #     ),
-    # ]
+    db_semesters = [
+        Semester(
+            semester_number=1,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[0].subject_code
+        ),
+        Semester(
+            semester_number=1,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[1].subject_code
+        ),
+        Semester(
+            semester_number=1,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[2].subject_code
+        ),
+        Semester(
+            semester_number=1,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[3].subject_code
+        ),
+        Semester(
+            semester_number=1,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[4].subject_code
+        ),
+        Semester(
+            semester_number=2,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[5].subject_code
+        ),
+        Semester(
+            semester_number=2,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[6].subject_code
+        ),
+        Semester(
+            semester_number=2,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[7].subject_code
+        ),
+        Semester(
+            semester_number=2,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[8].subject_code
+        ),
+        Semester(
+            semester_number=2,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[9].subject_code
+        ),
+        Semester(
+            semester_number=2,
+            course_id=db_courses[0].course_id,
+            subject_code=db_subjects[10].subject_code
+        ),
+    ]
 
-    # db.add_all(db_semesters)
-    # db.commit()
+    db.add_all(db_semesters)
+    db.commit()
     
     print("Table semesters inserted")
     
