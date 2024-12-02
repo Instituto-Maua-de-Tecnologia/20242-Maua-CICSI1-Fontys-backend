@@ -1,5 +1,6 @@
+from enum import Enum
 from app.core.database import Base
-from sqlalchemy import Column, DateTime, Enum as SqlEnum, Integer
+from sqlalchemy import Column, Enum as SqlEnum, Integer
 
 from app.enums.days_of_week_enum import DayOfWeekEnum
 from sqlalchemy.orm import relationship

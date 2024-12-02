@@ -71,7 +71,7 @@ class UserRepository(IUserRepository):
             .outerjoin(UserType, User.user_id == UserType.user_id)
             .outerjoin(TypeUser, UserType.type_id == TypeUser.type_id)
             .outerjoin(UserShipping, User.user_id == UserShipping.user_id)
-            .filter(TypeUser.type_id == '1')
+            .filter(TypeUser.type_id == '1', TypeUser.type_id == '4')
         )
         return [
             GetAllProfessorsResponseSchema(

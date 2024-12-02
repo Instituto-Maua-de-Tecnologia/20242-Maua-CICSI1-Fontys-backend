@@ -11,10 +11,6 @@ class Subject(Base):
    
     schedule = relationship("Schedule", back_populates="subject")
 
-   
+  
     user_subject = relationship("UserSubject", back_populates="subject")
-    
-    
-
-
-    
+    semester = relationship("Semester", back_populates="subject")
