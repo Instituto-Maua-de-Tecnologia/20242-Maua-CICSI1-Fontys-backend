@@ -7,9 +7,9 @@ class Semester(Base):
 
     semester_number = Column(Integer, primary_key=True, index=True)
     course_id = Column(String, ForeignKey("courses.course_id"), nullable=False)
-    subject_id = Column(String, ForeignKey("subjects.subject_id"), nullable=False)
+    subject_code = Column(String, ForeignKey("subjects.subject_code"), nullable=False)
     
-    # subject = relationship("Subject", back_populates="semester")
+    subject = relationship("Subject", back_populates="semester")
     course = relationship("Course", back_populates="semester")
     schedule = relationship("Schedule", back_populates="semester")
     coordination = relationship("Coordination", back_populates="semester")
