@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 
+from app.domain.entities.user_subject_entity import UserSubjectEntity
 from app.models import UserSubject
 
 
@@ -7,7 +8,7 @@ class SubjectRepository:
     def __init__(self, db: Session):
         self.db = db
 
-    def set_user_subjects(self, user_id: str, subjects: list[str]):
+    def set_user_subjects(self, user_id: str, subjects: list[str]) -> None:
         user_subjects = self.db.query(UserSubject).filter_by(user_id=user_id).all()
         current_subjects = {s.subject_code for s in user_subjects}
 

@@ -16,7 +16,7 @@ class SetAvailabilityController:
     def handle(self, data: SetAvailabilityRequest) -> SetAvailabilityResponse:
         try:
             user = self.notesService.execute(data.user_id, data.notes)
-            subjects = self.subjectService.execute(data.user_id, data.subjects)
+            self.subjectService.execute(data.user_id, data.subjects)
             availability = self.availabilityService.set_availability(data.availabilities, data.user_id)
             response_objects = []
             for a in availability:
@@ -27,7 +27,7 @@ class SetAvailabilityController:
             response = SetAvailabilityResponse(
                 availabilities=response_objects,
                 notes=user.notes,
-                subjects=subjects
+                subjects=data.subjects
             )
 
             return response
