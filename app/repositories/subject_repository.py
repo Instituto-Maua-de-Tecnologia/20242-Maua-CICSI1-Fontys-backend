@@ -1,6 +1,4 @@
 from sqlalchemy.orm import Session
-
-from app.domain.entities.user_subject_entity import UserSubjectEntity
 from app.models import UserSubject
 
 
