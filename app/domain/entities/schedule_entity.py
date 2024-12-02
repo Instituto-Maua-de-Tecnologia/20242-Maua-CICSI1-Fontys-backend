@@ -1,4 +1,5 @@
 from typing import Optional
+import uuid
 from pydantic import BaseModel
 from datetime import datetime
 from sqlalchemy import DateTime
@@ -14,14 +15,14 @@ class ScheduleEntity(BaseModel):
     created_at: Optional[datetime] = None       # Data de criação do cronograma             
         
     def to_orm(self) -> Schedule:
-        """Converte a entidade em um objeto ORM"""
         return Schedule(
+            schedule_id=self.get("schedule_id", str(uuid.uuid4())),
             course_id=self.course_id,
             user_id=self.user_id,
             slot_id=self.slot_id,
             subject_code=self.subject_code,
             number_semester=self.number_semester,
-            created_at=self.created_at,
+            created_at=self.get("created_at", datetime.utcnow()),
         )    
 
     

@@ -1,27 +1,20 @@
 import google.generativeai as genai
 from app.domain.entities.schedule_entity import ScheduleEntity
-from app.domain.interfaces.repositories.schedule_repository_interface import IScheduleRepository
 from app.core.config import settings
+from sqlalchemy.orm import Session
+
+from app.repositories.schedule_repository import ScheduleRepository
 
 class CreateScheduleIAService:
-    def __init__(self, repository: IScheduleRepository):
-        self.repository = repository
+    def __init__(self, db: Session):
+        self.schedule_repository = ScheduleRepository(db)
 
     def generate_schedule(self, data: ScheduleEntity) -> ScheduleEntity:
-        """
-        Gera um cronograma utilizando a API Gemini AI e salva no banco de dados.
-
-        :param data: Instância de ScheduleEntity com os dados iniciais do cronograma.
-        :return: Cronograma gerado e salvo no banco de dados.
-        """
-        # Validação básica
         if not data:
             raise ValueError("The schedule data cannot be empty.")
-        
-        # Obter o cronograma sugerido da API Gemini AI
+
         suggested_schedule_data = self._fetch_schedule_from_gemini(data)
 
-        # Criar a entidade do cronograma sugerido
         suggested_schedule = ScheduleEntity(**suggested_schedule_data)
 
         # Salvar o cronograma no banco de dados
