@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from sqlalchemy.orm import Session
 
@@ -17,7 +17,6 @@ class AvailabilityRepository:
         self.slot_repo = slot_repo
 
     def apply_changes(self, changes: SetAvailability, user_id: str) -> list[AvailabilityEntity]:
-        to_update = []
         to_delete = []
         for update in changes.updates:
             record = Availability(
@@ -25,9 +24,9 @@ class AvailabilityRepository:
                 slot_id=update.slot.slot_id,
                 user_id=user_id,
                 availability_value=update.value,
-                created_at=datetime.datetime.now()
+                created_at=datetime.now()
             )
-            self.db.add(record)
+            self.db.merge(record)
 
         for delete in changes.deletions:
             to_delete.append(delete.availability_id)
@@ -56,27 +55,3 @@ class AvailabilityRepository:
             )
             entities.append(a)
         return entities
-
-    def update_availabilities(
-        self, 
-        availabilities: list[AvailabilityEntity], 
-        notes: str, 
-        subjects: list[str], 
-        user_id: str
-    ):
-        self.db.query(Availability).filter_by(user_id=user_id).delete()
-
-        for availability in availabilities:
-            new_record = Availability(
-                user_id=user_id,
-                slot_id=availability.slot.slot_id,
-                availability_value=availability.value
-            )
-            self.db.add(new_record)
-            
-        user_record = self.db.query(User).filter_by(user_id=user_id).first()
-        if user_record:
-            user_record.notes = notes
-            user_record.subjects = subjects
-
-        self.db.commit()
