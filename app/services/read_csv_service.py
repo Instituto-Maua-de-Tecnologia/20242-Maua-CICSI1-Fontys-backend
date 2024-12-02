@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 class ReadCsvService:
     def __init__(self):
         pass
