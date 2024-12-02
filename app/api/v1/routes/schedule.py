@@ -42,6 +42,7 @@ def create_schedule(
 
 @router.get("/schedule", response_model=list[GenerateScheduleSchema] ,status_code=200)
 def generate_schedule(
+    semester_number: int,
     controller: GenerateScheduleController = Depends(get_generate_schedule_controller)
 ) -> list[GenerateScheduleSchema]:
-    return controller.handle()
+    return controller.handle(semester_number=semester_number)
