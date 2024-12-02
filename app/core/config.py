@@ -6,7 +6,7 @@ load_dotenv()
 class Settings(BaseSettings):
     DATABASE_URL_AIVEN: str
     API_KEY: str
-    PORT: int = 8000
+    PORT: int
 
     class Config:
         env_file = ".env"

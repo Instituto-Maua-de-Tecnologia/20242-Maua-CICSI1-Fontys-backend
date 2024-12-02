@@ -7,6 +7,7 @@ from app.api.v1.routes import slots
 import uvicorn
 from app.core.database import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
+from app.core.config import settings
 
 def init_models():
     Base.metadata.create_all(bind=engine)
@@ -37,6 +38,6 @@ async def read_root():
     return {"message": "API is running successfully!"}
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8000))
+    port = int(settings.PORT)
     uvicorn.run(app, host="0.0.0.0", port=port)
 
