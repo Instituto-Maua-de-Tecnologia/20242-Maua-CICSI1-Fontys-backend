@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 from app.domain.entities.availability_entity import AvailabilityEntity
@@ -28,3 +29,12 @@ class SetAvailabilityRequest(BaseModel):
 class SetAvailability(BaseModel):
     updates: list[AvailabilityEntity]
     deletions: list[AvailabilityEntity]
+
+class UpdateAvailabilityRequest(BaseModel):
+    subject_name: list[str]
+    availabilities: list[AddAvailability]
+    notes: Optional[str] = None
+    
+
+class UpdateAvailabilityResponse(BaseModel):
+    message: str
