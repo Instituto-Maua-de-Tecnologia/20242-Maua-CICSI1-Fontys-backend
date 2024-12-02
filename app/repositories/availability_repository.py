@@ -55,27 +55,3 @@ class AvailabilityRepository:
             )
             entities.append(a)
         return entities
-
-    def update_availabilities(
-        self, 
-        availabilities: list[AvailabilityEntity], 
-        notes: str, 
-        subjects: list[str], 
-        user_id: str
-    ):
-        self.db.query(Availability).filter_by(user_id=user_id).delete()
-
-        for availability in availabilities:
-            new_record = Availability(
-                user_id=user_id,
-                slot_id=availability.slot.slot_id,
-                availability_value=availability.value
-            )
-            self.db.add(new_record)
-            
-        user_record = self.db.query(User).filter_by(user_id=user_id).first()
-        if user_record:
-            user_record.notes = notes
-            user_record.subjects = subjects
-
-        self.db.commit()
