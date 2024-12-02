@@ -12,7 +12,7 @@ class CreateUserService:
                     photo: str = None,
                     notes: str = None
                     ) -> UserEntity:
-
+        
         user = UserEntity(
             name=name,
             microsoft_id=microsoft_id or None,
