@@ -32,6 +32,11 @@ class SetAvailability(BaseModel):
     updates: list[AvailabilityEntity]
     deletions: list[AvailabilityEntity]
 
+class SetAvailabilityResponse(BaseModel):
+    availabilities: list[AvailabilityResponseSchema]
+    notes: Optional[str] = None
+    subjects: list[str]
+
 class UpdateAvailabilityRequest(BaseModel):
     user_id: str
     subject_code: Optional[str] = None

@@ -1,4 +1,4 @@
-from app.schemas.availability import AvailabilityResponseSchema, SetAvailabilityRequest
+from app.schemas.availability import AvailabilityResponseSchema, SetAvailabilityRequest, SetAvailabilityResponse
 from app.services.avaialability_services.set_availability_service import SetAvailabilityService
 from fastapi import HTTPException, Query
 
@@ -13,7 +13,7 @@ class SetAvailabilityController:
         self.notesService = setNotesService
         self.subjectService =  setSubjectService
 
-    def handle(self, data: SetAvailabilityRequest) -> list[AvailabilityResponseSchema]:
+    def handle(self, data: SetAvailabilityRequest) -> SetAvailabilityResponse:
         try:
             user = self.notesService.execute(data.user_id, data.notes)
             subjects = self.subjectService.execute(data.user_id, data.subjects)
@@ -24,7 +24,12 @@ class SetAvailabilityController:
                     slot_id=a.slot.slot_id,
                     value=a.value,
                 ))
+            response = SetAvailabilityResponse(
+                availabilities=response_objects,
+                notes=user.notes,
+                subjects=subjects
+            )
 
-            return response_objects
+            return response
         except ValueError as e:
             raise HTTPException(status_code=400, detail=f"Error getting availability: {str(e)}")

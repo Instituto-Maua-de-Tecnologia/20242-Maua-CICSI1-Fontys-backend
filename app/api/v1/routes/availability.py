@@ -6,7 +6,8 @@ from sqlalchemy.orm import Session
 from app.controllers.availability_controller.get_availability_controller import GetAvailabilityController
 from app.controllers.availability_controller.set_availability_controller import SetAvailabilityController
 from app.core.database import SessionLocal
-from app.schemas.availability import  SetAvailabilityRequest, AvailabilityResponseSchema, UpdateAvailabilityRequest, UpdateAvailabilityResponse
+from app.schemas.availability import SetAvailabilityRequest, AvailabilityResponseSchema, UpdateAvailabilityRequest, \
+    UpdateAvailabilityResponse, SetAvailabilityResponse
 from app.services.avaialability_services.set_availability_service import SetAvailabilityService
 from app.services.avaialability_services.get_user_availability_service import GetUserAvailabilityService
 from app.services.subject_services.set_subject_service import SetSubjectService
@@ -39,9 +40,9 @@ def get_availability(
 ) -> List[AvailabilityResponseSchema]:
     return controller.handle(user_id)
 
-@router.post("/availability/", response_model=List[AvailabilityResponseSchema], status_code=201)
+@router.post("/availability/", response_model=SetAvailabilityResponse, status_code=201)
 def set_availability(
         data: SetAvailabilityRequest,
         controller: SetAvailabilityController = Depends(set_availability_controller)
-) -> List[AvailabilityResponseSchema]:
+) -> SetAvailabilityResponse:
     return controller.handle(data)
