@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 from uuid import uuid4
 from app.models.type_users import TypeUser
@@ -35,6 +36,16 @@ class UserRepository(IUserRepository):
                 self.db.add(db_type)
                 self.db.commit()
                 self.db.refresh(db_type)
+                
+                db_shipping = UserShipping(
+                    shipping_id=str(uuid4()),
+                    user_id=db_user.user_id,
+                    shipping_date= datetime.now(),
+                    status='UNSENT'
+                )
+                self.db.add(db_shipping)
+                self.db.commit()
+                self.db.refresh(db_shipping)
                 
             except Exception:
                 self.db.rollback()
