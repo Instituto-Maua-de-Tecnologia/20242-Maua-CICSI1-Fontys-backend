@@ -6,7 +6,7 @@ from app.controllers.user_controller.upload_excel_controller import UploadExcelC
 from app.core.database import get_db
 from app.schemas.user import CreateUserSchema, GetAllProfessorsResponseSchema, UserResponseSchema
 
-from app.services.user_services.upload_excel_service import UploadExcelService
+from app.services.user_services.upload_excel_service import ReadExcelService
 from app.services.user_services.create_user_service import CreateUserService
 from app.controllers.user_controller.create_user_controller import CreateUserController
 from app.services.user_services.get_all_professors_service import GetAllProfessorsService
@@ -25,7 +25,7 @@ def get_all_professors_controller(db: Session = Depends(get_db)) -> GetAllProfes
 
 # Dependency to get UploadExcelController
 def get_upload_excel_controller() -> UploadExcelController:
-    service = UploadExcelService()
+    service = ReadExcelService()
     return UploadExcelController(service)
 
 # Route to create a new user
