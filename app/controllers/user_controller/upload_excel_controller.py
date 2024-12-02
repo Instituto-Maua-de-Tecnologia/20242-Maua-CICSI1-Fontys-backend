@@ -1,7 +1,7 @@
 from fastapi import UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
-from app.services.upload_excel import UploadExcelService
+from app.services.user_services.upload_excel_service import UploadExcelService
 from app.schemas.upload_excel import UploadExcelSchema  
 
 class UploadExcelController:
