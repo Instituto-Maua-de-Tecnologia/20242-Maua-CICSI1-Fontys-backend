@@ -6,9 +6,7 @@ from app.controllers.user_controller.upload_excel_controller import UploadExcelC
 from app.core.database import get_db
 from app.schemas.user import CreateUserSchema, GetAllProfessorsResponseSchema, UserResponseSchema
 
-from app.services.user_services.upload_excel_service import UploadExcelService
-
-from app.services.upload_excel import ReadExcelService
+from app.services.user_services.upload_excel_service import ReadExcelService
 from app.services.user_services.create_user_service import CreateUserService
 from app.controllers.user_controller.create_user_controller import CreateUserController
 from app.services.user_services.get_all_professors_service import GetAllProfessorsService

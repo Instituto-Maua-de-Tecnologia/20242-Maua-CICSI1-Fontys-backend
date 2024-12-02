@@ -1,6 +1,7 @@
 import pandas as pd
 
-class UploadExcelService:
+
+class ReadExcelService:
     def __init__(self):
         pass
 
