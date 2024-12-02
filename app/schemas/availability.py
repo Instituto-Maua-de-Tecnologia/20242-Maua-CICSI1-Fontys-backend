@@ -23,8 +23,10 @@ class AddAvailability(BaseModel):
     value: AvailabilityValuesEnum
 
 class SetAvailabilityRequest(BaseModel):
+    subjects: list[str]
     availabilities: list[AddAvailability]
     user_id: str
+    notes: Optional[str] = None
 
 class SetAvailability(BaseModel):
     updates: list[AvailabilityEntity]
