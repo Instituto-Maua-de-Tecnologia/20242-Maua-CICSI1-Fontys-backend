@@ -92,3 +92,15 @@ class UserRepository(IUserRepository):
             )
             for user_id, name, type_name, status in db_users
         ]
+
+    def set_user_notes(self, user_id: str, notes: str) -> UserEntity:
+        user = self.db.query(User).filter_by(user_id=user_id).first()
+        user.notes = notes
+        self.db.commit()
+        return UserEntity(
+            user_id=user.user_id,
+            microsoft_id=user.microsoft_id,
+            name=user.name,
+            photo=user.photo,
+            notes=user.notes
+        )
