@@ -10,11 +10,9 @@ class GenerateScheduleController:
     def __init__ (self, schedule_service: GenerateScheduleService):
         self.schedule_service = schedule_service
 
-    def handle(self):
+    def handle(self, semester_number: int):
         try:
-
-            schedules = self.schedule_service.execute()
-
+            schedules = self.schedule_service.execute(semester_number=semester_number)
             response = []
             for schedule in schedules:
                 response.append(GenerateScheduleSchema(

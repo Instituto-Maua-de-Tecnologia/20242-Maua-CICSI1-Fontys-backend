@@ -74,47 +74,49 @@ class ScheduleRepository(IScheduleRepository):
             semester_number=db_schedule.semester_number,
             created_at=db_schedule.created_at
         )
-    def generate_schedule(self):
-        try:
-            query = text("""
-            WITH RandomAvailabilitys AS (
+        
+    def generate_schedule(self, semester_number: int) -> list[dict]:
+            try:
+                query = text(f"""
+                WITH RandomAvailabilitys AS (
+                    SELECT 
+                        u.user_id,
+                        u.name,
+                        us.subject_code,
+                        s.slot_id,
+                        s.day_of_week,
+                        s.time,
+                        a.availability_value,
+                        su.subject_name,
+                        se.course_id,
+                        se.semester_number,
+                        ROW_NUMBER() OVER (PARTITION BY s.day_of_week, s.time ORDER BY RANDOM()) AS rn
+                    FROM availabilitys a
+                    LEFT JOIN users u ON a.user_id = u.user_id
+                    LEFT JOIN user_subjects us ON u.user_id = us.user_id
+                    LEFT JOIN slots s ON a.slot_id = s.slot_id
+                    LEFT JOIN subjects su ON su.subject_code = us.subject_code
+                    LEFT JOIN semesters se ON se.subject_code = su.subject_code
+                    WHERE a.availability_value = 'POSSIBLE'
+                    AND se.semester_number = {semester_number}
+                )
                 SELECT 
-                    u.user_id,
-                    u.name,
-                    us.subject_code,
-                    s.slot_id,
-                    s.day_of_week,
-                    s.time,
-                    a.availability_value,
-                    su.subject_name,
-                    se.course_id,
-                    se.semester_number,
-                    ROW_NUMBER() OVER (PARTITION BY s.day_of_week, s.time ORDER BY RANDOM()) AS rn
-                FROM availabilitys a
-                LEFT JOIN users u ON a.user_id = u.user_id
-                LEFT JOIN user_subjects us ON u.user_id = us.user_id
-                LEFT JOIN slots s ON a.slot_id = s.slot_id
-                LEFT JOIN subjects su ON su.subject_code = us.subject_code
-                LEFT JOIN semesters se ON se.subject_code = su.subject_code
-                WHERE a.availability_value = 'POSSIBLE'
-            )
-            SELECT 
-                user_id,
-                name, 
-                subject_code, 
-                slot_id,
-                day_of_week, 
-                time,
-                availability_value,
-                subject_name,
-                course_id,
-                semester_number
-            FROM RandomAvailabilitys
-            WHERE rn = 1;
-            """)
+                    user_id,
+                    name, 
+                    subject_code, 
+                    slot_id,
+                    day_of_week, 
+                    time,
+                    availability_value,
+                    subject_name,
+                    course_id,
+                    semester_number
+                FROM RandomAvailabilitys
+                WHERE rn = 1;
+                """)
 
-            result = self.db.execute(query)
-            schedule = [row._asdict() for row in result]
-            return schedule
-        except Exception as e:
-            return str(e)
+                result = self.db.execute(query)
+                schedule = [row._asdict() for row in result]
+                return schedule
+            except Exception as e:
+                return str(e)

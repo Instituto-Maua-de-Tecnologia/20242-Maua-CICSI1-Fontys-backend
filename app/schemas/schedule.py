@@ -37,4 +37,4 @@ class GenerateScheduleSchema(BaseModel):
     availability_value: Optional[str]
     subject_name: Optional[str]
     course_id: Optional[str]
-    semester_id: Optional[int]
+    semester_number: Optional[int]

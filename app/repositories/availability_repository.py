@@ -1,4 +1,4 @@
-from operator import concat
+import datetime
 
 from sqlalchemy.orm import Session
 
@@ -24,9 +24,10 @@ class AvailabilityRepository:
                 availability_id=update.availability_id or None,
                 slot_id=update.slot.slot_id,
                 user_id=user_id,
-                availability_value=update.value
+                availability_value=update.value,
+                created_at=datetime.datetime.now()
             )
-            self.db.merge(record)
+            self.db.add(record)
 
         for delete in changes.deletions:
             to_delete.append(delete.availability_id)
