@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 
-from app.repositories.availability_repository import ScheduleRepository
+from app.repositories.schedule_repository import ScheduleRepository
 
 
 class GenerateScheduleService:
-    def _init (self, db: Session):
+    def __init__ (self, db: Session):
         self.schedule_repository = ScheduleRepository(db)
 
     def execute(self, semester_number: int):
