@@ -29,7 +29,7 @@ def get_upload_excel_controller() -> UploadExcelController:
     return UploadExcelController(service)
 
 # Route to create a new user
-@router.post("/users", response_model=UserResponseSchema, status_code=201)
+@router.post("/users/create-user", response_model=UserResponseSchema, status_code=201)
 def create_user(
     data: CreateUserSchema,
     controller: CreateUserController = Depends(get_create_user_controller)
