@@ -28,8 +28,8 @@ class ScheduleRepository(IScheduleRepository):
             return "something went wrong when uploading the schedule"
 
 
-    def get_schedule_by_id(self, id: str) -> Optional[ScheduleEntity]:
-        db_schedule = self.db.query(Schedule).filter(Schedule.schedule_id == id).first()
+    def get_schedule_by_id(self, schedule_id: str) -> Optional[ScheduleEntity]:
+        db_schedule = self.db.query(Schedule).filter(Schedule.schedule_id == schedule_id).first()
         if db_schedule:
             return ScheduleEntity(
                 schedule_id=db_schedule.schedule_id,
