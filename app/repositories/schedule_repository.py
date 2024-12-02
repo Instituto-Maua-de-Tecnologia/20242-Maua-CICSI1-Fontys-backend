@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -27,15 +28,19 @@ class ScheduleRepository:
         Salva uma lista de cronogramas gerados no banco de dados.
         """
         try:
+            print('entrou no metodo publish schedule')
+            print('lista de entidades schedule: ', schedules)
             for schedule in schedules:
                 db_schedule = Schedule(
                     user_id=schedule["user_id"],
                     slot_id=schedule["slot_id"],
                     subject_code=schedule["subject_code"],
-                    semester_number=schedule["semester_number"],
+                    semester_number=schedule["number_semester"],
                     course_id=schedule["course_id"],
-                    created_at=schedule.get("created_at")
+                    created_at=datetime.now()
                 )
+
+                print('db schedule to be added, ', db_schedule)
                 self.db.add(db_schedule)
 
             self.db.commit()

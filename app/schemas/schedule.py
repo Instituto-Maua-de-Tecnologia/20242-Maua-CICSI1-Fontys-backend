@@ -2,6 +2,8 @@ from typing import Optional
 from pydantic import BaseModel
 from sqlalchemy import DateTime
 
+from datetime import datetime
+
 from app.enums.availability_values_enum import AvailabilityValuesEnum
 from app.enums.days_of_week_enum import DayOfWeekEnum
 from app.enums.time_slot_enum import TimeSlotEnum
@@ -38,3 +40,20 @@ class GenerateScheduleSchema(BaseModel):
     subject_name: Optional[str]
     course_id: Optional[str]
     semester_number: Optional[int]
+
+class GetScheduleSchema(BaseModel):
+    schedule_id: str
+    course_id: str          
+    user_id: str            
+    slot_id: str                     
+    subject_code: str                    
+    number_semester: Optional[int] = None   
+    created_at: Optional[datetime] = None
+
+
+class ScheduleEntitySchemaRequest(BaseModel):
+    user_id: str
+    slot_id: int
+    subject_code: str
+    semester_number: int
+    course_id: str

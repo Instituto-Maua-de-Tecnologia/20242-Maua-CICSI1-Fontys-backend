@@ -9,11 +9,14 @@ class PublishScheduleService:
     def execute(self, schedules: list[ScheduleEntity]) -> str:
 
         if not schedules:
+            print('publish service, case if not schedules')
             return "No schedules provided in the request body."
 
         # Publica os cronogramas
         try:
+            print('inside try / except publish service')
             is_published = self.schedule_repository.publish_schedule(schedules)
+            print('passou do acesso ao banco no repository')
             if is_published:
                 return "Schedules published successfully."
         except Exception as e:

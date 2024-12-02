@@ -9,7 +9,7 @@ from app.models.schedules import Schedule
 class ScheduleEntity(BaseModel):
     course_id: str                              # ID do curso relacionado
     user_id: str                                # ID do professor/usuário
-    slot_id: str                                # ID do slot
+    slot_id: int                                # ID do slot
     subject_code: str                           # Código da matéria
     number_semester: Optional[int] = None       # Número do semestre
     created_at: Optional[datetime] = None       # Data de criação do cronograma             
